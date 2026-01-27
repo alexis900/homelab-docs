@@ -11,16 +11,19 @@ autor: Alejandro Martín Pérez
 # MNT — {{ titulo }}
 
 ## Descripción
+
 Descripción breve de la tarea de mantenimiento.
 
 ---
 
 ## Sistemas afectados
+
 - Servicio / Host / Contenedor
 
 ---
 
 ## Acciones realizadas
+
 - Actualización de paquetes
 - Reinicio de servicios
 - Limpieza / ajustes menores
@@ -28,6 +31,7 @@ Descripción breve de la tarea de mantenimiento.
 ---
 
 ## Validaciones
+
 - [ ] Servicio operativo
 - [ ] Logs sin errores
 - [ ] Conectividad correcta
@@ -35,14 +39,17 @@ Descripción breve de la tarea de mantenimiento.
 ---
 
 ## Resultado
+
 Resultado final del mantenimiento.
 
 ---
 
 ## Observaciones
+
 Notas breves si aplica.
 
 ---
 
 ## Firma
+
 **{{ autor }}** — {{ fecha }}

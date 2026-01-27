@@ -12,11 +12,13 @@ autor: Alejandro Martín Pérez
 # INC — {{ titulo }}
 
 ## Resumen del incidente
+
 Qué ha ocurrido y qué servicios se han visto afectados.
 
 ---
 
 ## Impacto
+
 - Servicios afectados
 - Duración
 - Usuarios (si aplica)
@@ -24,6 +26,7 @@ Qué ha ocurrido y qué servicios se han visto afectados.
 ---
 
 ## Línea temporal
+
 - **HH:MM** — Detección
 - **HH:MM** — Acciones iniciales
 - **HH:MM** — Causa identificada
@@ -33,32 +36,38 @@ Qué ha ocurrido y qué servicios se han visto afectados.
 ---
 
 ## Detección
+
 Cómo se detectó el problema.
 
 ---
 
 ## Causa raíz
+
 Explicación técnica de la causa real.
 
 ---
 
 ## Acciones realizadas
+
 1. Acción 1
 2. Acción 2
 
 ---
 
 ## Resolución
+
 Estado final tras resolver el incidente.
 
 ---
 
 ## Lecciones aprendidas
+
 Qué se puede mejorar para evitar recurrencias.
 
 ---
 
 ## Acciones posteriores
+
 - [ ] Crear RFC si procede
 - [ ] Actualizar documentación
 - [ ] Mejorar monitorización
@@ -67,4 +76,5 @@ Qué se puede mejorar para evitar recurrencias.
 ---
 
 ## Firma
+
 **{{ autor }}** — {{ fecha_fin }}

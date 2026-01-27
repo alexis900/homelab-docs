@@ -11,11 +11,13 @@ autor: Alejandro Martín Pérez
 # RFC — {{ titulo }}
 
 ## Resumen
+
 Descripción breve del cambio que se va a realizar.
 
 ---
 
 ## Motivación
+
 ¿Por qué se realiza este cambio?
 
 - Mejora funcional
@@ -26,11 +28,13 @@ Descripción breve del cambio que se va a realizar.
 ---
 
 ## Justificación de criticidad
+
 Explicación del impacto potencial en caso de fallo.
 
 ---
 
 ## Sistemas / Dispositivos afectados
+
 - Servidores / CTs / VMs
 - Servicios
 - Infraestructura de red
@@ -38,6 +42,7 @@ Explicación del impacto potencial en caso de fallo.
 ---
 
 ## Plan de acción
+
 Pasos detallados para ejecutar el cambio:
 
 1. Backup completo
@@ -51,17 +56,20 @@ Pasos detallados para ejecutar el cambio:
 ---
 
 ## Riesgos
+
 - Riesgo 1
 - Riesgo 2
 
 ---
 
 ## Mitigación
+
 Acciones para reducir o controlar los riesgos.
 
 ---
 
 ## Plan de rollback
+
 Pasos claros para volver al estado anterior:
 
 1. Detener servicio actualizado
@@ -72,6 +80,7 @@ Pasos claros para volver al estado anterior:
 ---
 
 ## Validaciones post-cambio
+
 - [ ] Servicios accesibles
 - [ ] Sistemas en línea
 - [ ] Configuraciones aplicadas
@@ -81,15 +90,17 @@ Pasos claros para volver al estado anterior:
 ---
 
 ## Resultado
+
 (Completar tras ejecutar el cambio)
 
 ---
 
 ## Observaciones
+
 Notas adicionales o lecciones aprendidas.
 
 ---
 
 ## Firma
-**{{ autor }}** — {{ fecha }}
 
+**{{ autor }}** — {{ fecha }}

@@ -1,12 +1,6 @@
-# 
+# Documentación de Infraestructura de Red
 
-# 
-
-Documentación de Infraestructura de Red
-
-##  
-
-# Tabla de contenido {#tabla-de-contenido .TOC-Heading}
+## Tabla de contenido {#tabla-de-contenido .TOC-Heading}
 
 [Introducción [3](#introducción)](#introducción)
 
@@ -42,9 +36,7 @@ Documentación de Infraestructura de Red
 
 [**Cómo empezar** [14](#cómo-empezar)](#cómo-empezar)
 
-##  
-
-# Introducción
+## Introducción
 
 Este documento reúne toda la información técnica y operacional de la
 infraestructura de red para facilitar la gestión, mantenimiento y
@@ -55,13 +47,13 @@ Este documento va dirigido a tener documentada toda la infraestructura
 de red de hogar, donde va dirigida a los administradores y personal de
 soporte.
 
-# Arquitectura General de la Red
+## Arquitectura General de la Red
 
 ## Diagrama de red general
 
 ## Segmentación de la Red Doméstica
 
-#### Introducción
+### Introducción
 
 La segmentación de la red doméstica mediante VLANs es una práctica
 esencial para mejorar la seguridad, la eficiencia y la gestión de los
@@ -72,17 +64,17 @@ equipos y aumentar el riesgo de accesos no autorizados.
 
 Mediante la creación de VLANs se logra:
 
--   **Aislar dispositivos críticos o vulnerables**, como sistemas de
+- **Aislar dispositivos críticos o vulnerables**, como sistemas de
     alarma o dispositivos IoT, reduciendo posibles riesgos de seguridad.
 
--   **Optimizar el tráfico interno**, evitando interferencias entre
+- **Optimizar el tráfico interno**, evitando interferencias entre
     dispositivos de alto consumo de ancho de banda y servicios
     esenciales.
 
--   **Facilitar la gestión de la red**, concentrando el acceso a equipos
+- **Facilitar la gestión de la red**, concentrando el acceso a equipos
     de administración en una VLAN específica.
 
--   **Preparar la red para futuros crecimientos o cambios**, permitiendo
+- **Preparar la red para futuros crecimientos o cambios**, permitiendo
     añadir nuevos servicios o dispositivos sin comprometer la estructura
     existente.
 
@@ -98,21 +90,21 @@ organización, sino una estrategia clave para **maximizar la seguridad,
 la eficiencia y la gestión del tráfico**. Cada VLAN tiene un propósito
 específico que responde a necesidades concretas de la red doméstica:
 
--   **Seguridad:** Separar dispositivos críticos o potencialmente
+- **Seguridad:** Separar dispositivos críticos o potencialmente
     vulnerables, como sistemas de alarma o equipos IoT, limita el
     alcance de posibles intrusiones y protege la información sensible.
 
--   **Optimización del tráfico:** Al aislar servicios de alto consumo de
+- **Optimización del tráfico:** Al aislar servicios de alto consumo de
     ancho de banda en VLANs específicas, se reduce la congestión en la
     red principal, garantizando un rendimiento estable para dispositivos
     esenciales.
 
--   **Gestión centralizada:** La VLAN de administración permite
+- **Gestión centralizada:** La VLAN de administración permite
     concentrar el acceso a routers, switches y otros dispositivos de
     red, facilitando la configuración, el monitoreo y la aplicación de
     políticas de seguridad.
 
--   **Escalabilidad y flexibilidad:** La estructura segmentada permite
+- **Escalabilidad y flexibilidad:** La estructura segmentada permite
     incorporar nuevos dispositivos o servicios sin afectar la
     operatividad de la red existente, ofreciendo un crecimiento
     controlado y seguro.
@@ -139,7 +131,7 @@ red.
 
   99      10.0.99.0/24     10.0.99.1            MNGMNT
 
-  100     10.0.100.0/24    10.0.100.1           VPN
+100     10.0.100.0/24    10.0.100.1           VPN
   ------------------------------------------------------------------------
 
 ##### VLAN 1 --- LAN (10.0.1.0/24, GW 10.0.1.1)
@@ -215,7 +207,7 @@ enlace y funciones asociadas, sirve como referencia clara para la
 gestión cotidiana y para cualquier actualización o ampliación de la
 infraestructura de red.
 
-## 
+##
 
 ## Dispositivos y Servicios
 
@@ -228,7 +220,7 @@ principales.
 
   ------------------------------------------------------------------------------------
   **Nodo**   **ID**   **Debian**   **Función         **Estado**     **Notas rápidas**
-                                   principal**                      
+                                   principal**
   ---------- -------- ------------ ----------------- -------------- ------------------
   ZEUS       101      13.2         Controlador Omada 🟢 Actualizado Gestión de APs y
                                                                     switches
@@ -245,10 +237,10 @@ principales.
   HERMES     104      13.2         Servidor CUPS     🟢 Actualizado Impresión en red
 
   HERMES     201      13.2         Zigbee2MQTT +     🟢 Actualizado Domótica y MQTT
-                                   MQTT                             
+                                   MQTT
 
-  HERMES     203      13.2         Servidor DNS      🟢 Actualizado Redundancia DNS
-                                   secundario                       
+HERMES     203      13.2         Servidor DNS      🟢 Actualizado Redundancia DNS
+                                   secundario
   ------------------------------------------------------------------------------------
 
 ### Detalle de Dispositivos y Servicios
@@ -257,152 +249,152 @@ principales.
 
   ---------------------------------------------------------------------------------------------------------------
   **Servicio**   **Modelo /   **Función /      **IP**         **VLAN / **Servicios que   **Estado**   **Notas**
-                 Software**   Descripción**                   Red**    provee**                       
+                 Software**   Descripción**                   Red**    provee**
   -------------- ------------ ---------------- -------------- -------- ----------------- ------------ -----------
-  Omada          Omada        Gestión          192.168.1.10   Admin 10 Gestión de APs,   🟢           
-                 Controller   centralizada de                 / WiFi   SSIDs, VLANs                   
-                              APs y switches                  20                                      
+  Omada          Omada        Gestión          192.168.1.10   Admin 10 Gestión de APs,   🟢
+                 Controller   centralizada de                 / WiFi   SSIDs, VLANs
+                              APs y switches                  20
 
-  Uptime Kuma    Uptime Kuma  Monitorización   192.168.1.20   Admin 10 Uptime y alertas  🟢           
-                              de servicios                             (correo /                      
-                              internos y                               Telegram)                      
-                              externos                                                                
+  Uptime Kuma    Uptime Kuma  Monitorización   192.168.1.20   Admin 10 Uptime y alertas  🟢
+                              de servicios                             (correo /
+                              internos y                               Telegram)
+                              externos
 
-  NS1            BIND9        Servidor DNS     192.168.1.5    Admin 10 DNS interno y     🟢           
-                              principal                                externo,                       
-                                                                       resolución                     
-                                                                       recursiva                      
+  NS1            BIND9        Servidor DNS     192.168.1.5    Admin 10 DNS interno y     🟢
+                              principal                                externo,
+                                                                       resolución
+                                                                       recursiva
 
-  NPM            Nginx Proxy  Proxy inverso /  192.168.1.15   Admin 10 Proxy inverso,    🟢           
-                 Manager      Servidor web                             HTTPS,                         
-                                                                       redirección de                 
-                                                                       dominios                       
+NPM            Nginx Proxy  Proxy inverso /  192.168.1.15   Admin 10 Proxy inverso,    🟢
+                 Manager      Servidor web                             HTTPS,
+                                                                       redirección de
+                                                                       dominios
   ---------------------------------------------------------------------------------------------------------------
 
 ##### Nodo HERMES
 
   -------------------------------------------------------------------------------------------------------------------
   **Dispositivo / **Modelo /    **Función /      **IP**         **VLAN / **Servicios que     **Estado**   **Notas**
-  Servicio**      Software**    Descripción**                   Red**    provee**                         
+  Servicio**      Software**    Descripción**                   Red**    provee**
   --------------- ------------- ---------------- -------------- -------- ------------------- ------------ -----------
-  CUPS            CUPS 2.x /    Servidor de      192.168.1.30   Admin 10 Impresión en red,   🟢           
-                  Debian 13.2   impresión en red                         administración de                
-                                                                         trabajos                         
+  CUPS            CUPS 2.x /    Servidor de      192.168.1.30   Admin 10 Impresión en red,   🟢
+                  Debian 13.2   impresión en red                         administración de
+                                                                         trabajos
 
-  Z2M             Zigbee2MQTT / Integración de   192.168.1.25   Admin 10 MQTT para domótica, 🟢           
-                  Debian 13.2   dispositivos                             comunicación Zigbee              
-                                Zigbee a MQTT                                                             
+  Z2M             Zigbee2MQTT / Integración de   192.168.1.25   Admin 10 MQTT para domótica, 🟢
+                  Debian 13.2   dispositivos                             comunicación Zigbee
+                                Zigbee a MQTT
 
-  NS2             Debian 13.2   Servidor DNS     192.168.1.6    Admin 10 DNS secundario,     🟢           
-                                secundario                               redundancia y alta               
-                                                                         disponibilidad                   
+NS2             Debian 13.2   Servidor DNS     192.168.1.6    Admin 10 DNS secundario,     🟢
+                                secundario                               redundancia y alta
+                                                                         disponibilidad
   -------------------------------------------------------------------------------------------------------------------
 
 ### Topología de Red
 
--   Todos los nodos ZEUS y HERMES conectados al switch principal de
+- Todos los nodos ZEUS y HERMES conectados al switch principal de
     administración (VLAN 10)
 
--   Comunicación clave:
+- Comunicación clave:
 
-    -   DNS: ns1 ↔ ns2
+  - DNS: ns1 ↔ ns2
 
-    -   MQTT: z2m ↔ otros dispositivos Zigbee
+  - MQTT: z2m ↔ otros dispositivos Zigbee
 
-    -   Proxy inverso: npm → acceso web interno/externo
+  - Proxy inverso: npm → acceso web interno/externo
 
--   **Recomendación en Word:** Insertar un diagrama simple usando
+- **Recomendación en Word:** Insertar un diagrama simple usando
     "Insertar → Formas → Cuadros y flechas" o importar un PNG de
     Draw.io.
 
 ### Procedimientos y Notas
 
--   **Backups:**
+- **Backups:**
 
-    -   Omada → copia de configuración semanal
+  - Omada → copia de configuración semanal
 
-    -   NS1 / NS2 → backup de zonas DNS 24h
+  - NS1 / NS2 → backup de zonas DNS 24h
 
-    -   Z2M → backup de topics MQTT y configuración Zigbee
+  - Z2M → backup de topics MQTT y configuración Zigbee
 
--   **Actualizaciones:**
+- **Actualizaciones:**
 
-    -   Todos los nodos corren Debian 13.2 → revisar paquetes críticos
+  - Todos los nodos corren Debian 13.2 → revisar paquetes críticos
         semanalmente
 
--   **Resolución de problemas comunes:**
+- **Resolución de problemas comunes:**
 
-    -   Servicio caído → revisar logs /var/log/\[servicio\].log
+  - Servicio caído → revisar logs /var/log/\[servicio\].log
 
-    -   Problema de comunicación → revisar VLANs, IPs, firewall interno
+  - Problema de comunicación → revisar VLANs, IPs, firewall interno
 
--   **Dependencias:**
+- **Dependencias:**
 
-    -   NPM depende de NS1/NS2 para resolución de nombres
+  - NPM depende de NS1/NS2 para resolución de nombres
 
-    -   Z2M depende de MQTT y de dispositivos Zigbee conectados
+  - Z2M depende de MQTT y de dispositivos Zigbee conectados
 
 ### Historial de Cambios
 
   ----------------------------------------------------------------------------
   **Fecha**    **Nodo /          **Cambio realizado**        **Responsable**
-               Servicio**                                    
+               Servicio**
   ------------ ----------------- --------------------------- -----------------
   2026-01-03   ZEUS / Omada      Actualización a Debian 13.2 Alejandro
 
-  2026-01-03   HERMES / Z2M      Añadido nuevo topic MQTT    Alejandro
+2026-01-03   HERMES / Z2M      Añadido nuevo topic MQTT    Alejandro
   ----------------------------------------------------------------------------
 
 # Seguridad y Firewall
 
--   Políticas implementadas.
+- Políticas implementadas.
 
--   Reglas de firewall principales.
+- Reglas de firewall principales.
 
--   Segmentación y control de acceso.
+- Segmentación y control de acceso.
 
 # Monitorización y Alertas
 
--   Herramientas usadas (Uptime Kuma, Prometheus, etc.).
+- Herramientas usadas (Uptime Kuma, Prometheus, etc.).
 
--   Procedimientos para monitorizar servicios y equipos.
+- Procedimientos para monitorizar servicios y equipos.
 
-##  
+##
 
 # Backup y Recuperación
 
--   Estrategias de backup.
+- Estrategias de backup.
 
--   Procedimientos para recuperación ante fallos.
+- Procedimientos para recuperación ante fallos.
 
 # Procesos y Procedimientos (SOP)
 
--   Procedimientos estándar para cambios, actualizaciones, incidencias.
+- Procedimientos estándar para cambios, actualizaciones, incidencias.
 
 # Bitácora de cambios
 
--   Listado de RFCs implementados y en curso.
+- Listado de RFCs implementados y en curso.
 
--   Historial de cambios en la infraestructura.
+- Historial de cambios en la infraestructura.
 
 # Referencias y Recursos
 
--   Documentación oficial de equipos y software.
+- Documentación oficial de equipos y software.
 
--   Enlaces a repositorios, scripts, y manuales internos.
+- Enlaces a repositorios, scripts, y manuales internos.
 
 ### **Cómo empezar**
 
-1.  **Reúne toda la información básica:** inventario de equipos,
+1. **Reúne toda la información básica:** inventario de equipos,
     esquemas de red, configuraciones actuales.
 
-2.  **Crea diagramas visuales:** usa herramientas como draw.io,
+2. **Crea diagramas visuales:** usa herramientas como draw.io,
     diagrams.net o cualquier software de diagramas.
 
-3.  **Escribe resúmenes claros para cada sección.\
+3. **Escribe resúmenes claros para cada sección.\
     **
 
-4.  **Documenta procedimientos y scripts importantes.\
+4. **Documenta procedimientos y scripts importantes.\
     **
 
-5.  **Mantén la documentación viva:** revisa y actualiza regularmente.
+5. **Mantén la documentación viva:** revisa y actualiza regularmente.
