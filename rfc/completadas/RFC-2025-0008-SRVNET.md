@@ -1,103 +1,81 @@
-# RFC-ID:
+---
+rfc: RFC-2025-0008-SRVNET
+titulo: Instalación del controlador Omada en la VLAN 99 y adopción del switch core
+tipo: SRV / NET
+estado: Completada
+criticidad: Media
+fecha: 2025-08-01
+autor: Alejandro Martín Pérez
+---
 
-RFC-2025-0008-SRVNET
+# RFC — Instalación del controlador Omada en la VLAN 99 y adopción del switch core
 
-# Título:
+## Resumen
 
-Instalación del controlador Omada en la VLAN 99 y adopción del switch
-core
+Se desplegó el **controlador Omada** en un contenedor LXC dentro de la **VLAN 99** y se adoptó el **switch TP-Link TL-SG2008** para gestión centralizada, garantizando visibilidad y control sobre la red doméstica.
 
-# Tipo de cambio:
+---
 
-SRV / NET
+## Motivación
 
-# Fecha propuesta:
+- Establecer plataforma de gestión unificada para la red doméstica.  
+- Centralizar control, monitorización y mantenimiento de switches y puntos de acceso.  
 
-2025-08-01
+---
 
-# Estado:
+## Justificación de criticidad
 
-Propuesta
+El cambio introduce un nuevo controlador de red y modifica la gestión del switch principal, por lo que un fallo podría afectar la conectividad de la red doméstica. Por ello se considera **criticidad media**.
 
-# Criticidad:
+---
 
-Media
+## Dispositivo(s) afectados
 
-# Justificación de criticidad:
+- Contenedor LXC: `omada.home.arpa`  
+- VLAN 99 (infraestructura)  
+- Switch TL-SG2008  
+- Red de gestión  
+- Servidor DNS interno (Pi-hole)
 
-El cambio introduce un nuevo controlador de red y modifica la gestión
-del switch principal, lo que puede afectar a la conectividad si no se
-realiza correctamente.
+---
 
-# Resumen:
+## Plan de acción
 
-Se desplegará el controlador Omada en un contenedor LXC dentro de la
-VLAN 99 y se procederá a adoptar el switch TP-Link TL-SG2008 para una
-gestión centralizada.
+1. Crear contenedor LXC (`omada`) en Proxmox con IP fija en VLAN 99.  
+2. Instalar Omada Controller en el contenedor y verificar conectividad con el switch.  
+3. Acceder a la interfaz del switch y restaurar configuración de fábrica si es necesario.  
+4. Adoptar el switch desde Omada.  
+5. Verificar correcta aparición del dispositivo y gestión centralizada.  
+6. Realizar copia de seguridad de la configuración del controlador.  
+7. Registrar nombre DNS `omada.home.arpa` con IP estática en Pi-hole o Bind9.  
+8. Documentar el cambio en el sistema de gestión.
 
-# Motivación:
+---
 
-Establecer una plataforma de gestión unificada para la red doméstica,
-con visibilidad, control y mantenimiento centralizado de switches y
-puntos de acceso.
+## Riesgos
 
-# Dispositivo(s) afectados:
+- Fallos de adopción del switch por configuraciones previas o firmware.  
+- Pérdida de conectividad si se aplica configuración errónea.  
+- Posibles reinicios del switch durante el proceso.
 
--   Contenedor LXC: omada.home.arpa
+---
 
--   VLAN 99 (infraestructura)\
-    Switch TL-SG2008
+## Mitigación
 
--   Red de gestión
+- Realizar copia de seguridad previa del switch y contenedor.  
+- Ejecutar adopción fuera de horas críticas.  
+- Validar configuración antes de aplicarla.  
+- Documentar fallback manual (IP/usuario temporal) del switch.
 
--   Servidor DNS interno (Pi-hole)
+---
 
-# Plan de acción:
+## Resultado
 
--   Crear contenedor LXC (omada) en Proxmox con IP fija en la VLAN 99.
+Adopción correctamente realizada.  
+El switch inicialmente estaba en VLAN 1; se migró a VLAN 99 desde la propia interfaz de Omada para su correcta gestión.
 
--   Instalar Omada Controller en dicho contenedor.\
-    Comprobar conectividad desde Omada hacia el switch.\
-    Acceder a la interfaz del switch y restaurar configuración de
-    fábrica si es necesario.
+---
 
--   Adoptar el switch desde Omada.
+## Firma
 
--   Verificar la correcta aparición del dispositivo y su gestión.
-
--   Realizar copia de seguridad de la configuración del controlador.
-
--   Registrar nombre DNS omada.home.arpa con IP estática en Pi-hole o
-    Bind9
-
--   Documentar el cambio en el sistema de gestión.
-
-# Riesgos:
-
--   Fallos de adopción del switch (por configuraciones previas o
-    firmware).
-
--   Pérdida de conectividad si se aplica una configuración errónea.
-
--   Posibles reinicios del switch durante el proceso.
-
-# Mitigación:
-
--   Realizar copia de seguridad previa del switch y del contenedor.
-
--   Ejecutar la adopción fuera de horas críticas.
-
--   Validar la configuración antes de aplicarla.
-
--   Documentar fallback manual (IP/usuario temporal) del switch.
-
-# Resultado:
-
-Adopción correctamente realizada.
-
-Se tuvo que adoptar el switch estando en la VLAN1, y, en la propia
-interfaz de Omada migrar a la VLAN99 para su correcta gestión.
-
-# Firma:
-
-Alejandro Martín Perez -- 2025-08-01
+**Alejandro Martín Pérez** — 2025-08-01
