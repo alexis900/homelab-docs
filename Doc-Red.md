@@ -1,400 +1,395 @@
 # Documentación de Infraestructura de Red
 
-## Tabla de contenido {#tabla-de-contenido .TOC-Heading}
+**Última actualización:** 28 de enero de 2026  
+**Responsable:** Alejandro Martín Pérez
 
-[Introducción [3](#introducción)](#introducción)
-
-[Arquitectura General de la Red
-[4](#arquitectura-general-de-la-red)](#arquitectura-general-de-la-red)
-
-[Diagrama de red general
-[4](#diagrama-de-red-general)](#diagrama-de-red-general)
-
-[Segmentación de la Red Doméstica
-[4](#segmentación-de-la-red-doméstica)](#segmentación-de-la-red-doméstica)
-
-[Equipos principales [6](#_Toc214144449)](#_Toc214144449)
-
-[Dispositivos y Servicios
-[7](#dispositivos-y-servicios)](#dispositivos-y-servicios)
-
-[Seguridad y Firewall [8](#seguridad-y-firewall)](#seguridad-y-firewall)
-
-[Monitorización y Alertas
-[9](#monitorización-y-alertas)](#monitorización-y-alertas)
-
-[Backup y Recuperación
-[10](#backup-y-recuperación)](#backup-y-recuperación)
-
-[Procesos y Procedimientos (SOP)
-[11](#procesos-y-procedimientos-sop)](#procesos-y-procedimientos-sop)
-
-[Bitácora de cambios [12](#bitácora-de-cambios)](#bitácora-de-cambios)
-
-[Referencias y Recursos
-[13](#referencias-y-recursos)](#referencias-y-recursos)
-
-[**Cómo empezar** [14](#cómo-empezar)](#cómo-empezar)
+---
 
 ## Introducción
 
-Este documento reúne toda la información técnica y operacional de la
-infraestructura de red para facilitar la gestión, mantenimiento y
-evolución. En este cubre toda la infraestructura como pueden ser
-switches, routers, VLANs, servidores, servicios, etc.
+Este documento reúne toda la información técnica y operacional de la infraestructura de red para facilitar la gestión, mantenimiento y evolución. Cubre toda la infraestructura incluyendo switches, routers, VLANs, servidores, servicios, procedimientos y políticas de seguridad.
 
-Este documento va dirigido a tener documentada toda la infraestructura
-de red de hogar, donde va dirigida a los administradores y personal de
-soporte.
+**Audiencia:** Administradores de red y personal de soporte técnico.
 
-## Arquitectura General de la Red
+---
 
-## Diagrama de red general
+## Tabla de Contenidos
 
-## Segmentación de la Red Doméstica
+- [Introducción](#introducción)
+- [Arquitectura General](#arquitectura-general)
+- [Segmentación de VLANs](#segmentación-de-vlans)
+- [Dispositivos de Infraestructura](#dispositivos-de-infraestructura)
+- [Servicios y Contenedores](#servicios-y-contenedores)
+- [Seguridad y Firewall](#seguridad-y-firewall)
+- [Monitorización y Alertas](#monitorización-y-alertas)
+- [Backup y Recuperación](#backup-y-recuperación)
+- [Procedimientos (SOP)](#procedimientos-sop)
+- [Historial de Cambios](#historial-de-cambios)
 
-### Introducción
+---
 
-La segmentación de la red doméstica mediante VLANs es una práctica
-esencial para mejorar la seguridad, la eficiencia y la gestión de los
-dispositivos conectados. En una red no segmentada, todos los
-dispositivos comparten el mismo espacio de comunicación, lo que puede
-provocar problemas de congestión, dificultades para administrar los
-equipos y aumentar el riesgo de accesos no autorizados.
+## Arquitectura General
 
-Mediante la creación de VLANs se logra:
+### Descripción General
 
-- **Aislar dispositivos críticos o vulnerables**, como sistemas de
-    alarma o dispositivos IoT, reduciendo posibles riesgos de seguridad.
+La red doméstica utiliza una arquitectura de **segmentación por VLANs** con un firewall central (OPNsense) que gestiona el tráfico entre segmentos. La infraestructura de virtualización (Proxmox) aloja contenedores para servicios críticos, y dispositivos especializados (switches, APs, controladores) proporcionan conectividad y gestión centralizada.
 
-- **Optimizar el tráfico interno**, evitando interferencias entre
-    dispositivos de alto consumo de ancho de banda y servicios
-    esenciales.
+### Componentes Principales
 
-- **Facilitar la gestión de la red**, concentrando el acceso a equipos
-    de administración en una VLAN específica.
+| Componente | Dispositivo | Función | VLAN |
+|-----------|-----------|---------|------|
+| Firewall | OPNsense | Enrutamiento, firewall, políticas de red | 99 |
+| Switch Core | TP-Link TL-SG2008 | Conmutación entre VLANs y dispositivos | 99 |
+| Virtualización | Proxmox | Host para contenedores (CT) | 99 |
+| Gestión Omada | Omada (CT) | Gestión centralizada de switches Omada | 99 |
+| Gestión UniFi | UniFi OS (CT) | Gestión centralizada de APs UniFi | 99 |
+| Monitorización | Uptime Kuma (CT) | Monitorización de servicios y alertas | 30 |
 
-- **Preparar la red para futuros crecimientos o cambios**, permitiendo
-    añadir nuevos servicios o dispositivos sin comprometer la estructura
-    existente.
+---
 
-Esta sección detalla las VLANs configuradas en la red, incluyendo sus
-rangos de direcciones IP, puertas de enlace y funciones específicas,
-proporcionando una visión clara y organizada de la segmentación
-implementada.
+## Segmentación de VLANs
 
-#### Justificación de la Segmentación
+### Justificación
 
-La segmentación de la red mediante VLANs no es solo una cuestión de
-organización, sino una estrategia clave para **maximizar la seguridad,
-la eficiencia y la gestión del tráfico**. Cada VLAN tiene un propósito
-específico que responde a necesidades concretas de la red doméstica:
+La segmentación mediante VLANs es esencial para:
 
-- **Seguridad:** Separar dispositivos críticos o potencialmente
-    vulnerables, como sistemas de alarma o equipos IoT, limita el
-    alcance de posibles intrusiones y protege la información sensible.
+- **Seguridad:** Aislar dispositivos críticos y potencialmente vulnerables (IoT, alarmas)
+- **Optimización:** Reducir congestión separando servicios de alto ancho de banda
+- **Gestión:** Concentrar acceso administrativo en VLAN segregada
+- **Escalabilidad:** Facilitar crecimiento futuro sin afectar operativa actual
 
-- **Optimización del tráfico:** Al aislar servicios de alto consumo de
-    ancho de banda en VLANs específicas, se reduce la congestión en la
-    red principal, garantizando un rendimiento estable para dispositivos
-    esenciales.
+### Tabla de VLANs
 
-- **Gestión centralizada:** La VLAN de administración permite
-    concentrar el acceso a routers, switches y otros dispositivos de
-    red, facilitando la configuración, el monitoreo y la aplicación de
-    políticas de seguridad.
+| VLAN | Nombre | Red | Gateway | Propósito |
+|------|--------|-----|---------|----------|
+| 1 | LAN | 10.0.1.0/24 | 10.0.1.1 | Dispositivos de usuario general |
+| 2 | Alarma | 10.0.2.0/29 | 10.0.2.1 | Sistema de alarma (aislado) |
+| 20 | DMZ | 10.0.20.0/24 | 10.0.20.1 | Servicios expuestos a internet |
+| 30 | Servidores | 10.0.30.0/24 | 10.0.30.1 | Contenedores, almacenamiento, servicios internos |
+| 40 | IoT | 10.0.40.0/24 | 10.0.40.1 | Dispositivos IoT (firmware limitado) |
+| 99 | Management | 10.0.99.0/24 | 10.0.99.1 | Infraestructura: switches, firewall, virtualizadores |
+| 100 | VPN | 10.0.100.0/24 | 10.0.100.1 | Clientes remotos (acceso VPN) |
 
-- **Escalabilidad y flexibilidad:** La estructura segmentada permite
-    incorporar nuevos dispositivos o servicios sin afectar la
-    operatividad de la red existente, ofreciendo un crecimiento
-    controlado y seguro.
+### Descripción Detallada de VLANs
 
-La combinación de estas medidas asegura que la red doméstica funcione de
-manera eficiente, segura y preparada para futuras necesidades,
-manteniendo al mismo tiempo un control claro sobre cada segmento de la
-red.
+#### VLAN 1 — LAN (10.0.1.0/24)
 
-#### Descripción de las VLAN
+- **Propósito:** Segmento principal para dispositivos de usuario (PCs, laptops, teléfonos)
+- **Acceso:** Acceso completo a servicios internos e internet
+- **Características:** Red base, sin restricciones especiales
+- **Gateway:** 10.0.1.1
 
-  ------------------------------------------------------------------------
-  VLAN    Rango de red     Puerta de enlace     Descripción
-  ------- ---------------- -------------------- --------------------------
-  1       10.0.1.0/24      10.0.1.1             LAN
+#### VLAN 2 — Alarma (10.0.2.0/29)
 
-  2       10.0.2.0/29      10.0.2.1             Alarma
+- **Propósito:** Aislamiento exclusivo del sistema de alarma
+- **Acceso:** Solo tráfico saliente hacia servidores del proveedor
+- **Características:** Rango pequeño (/29) para limitar exposición
+- **Gateway:** 10.0.2.1
+- **Restricciones:** No puede acceder a otros segmentos internos
 
-  20      10.0.20.0/24     10.0.20.1            DMZ
+#### VLAN 20 — DMZ (10.0.20.0/24)
 
-  30      10.0.20.0/24     10.0.30.1            Servidores
+- **Propósito:** Servicios expuestos a internet (Nginx Proxy Manager)
+- **Acceso:** Tráfico entrante desde WAN con control estricto
+- **Características:** Aislada del resto de infraestructura
+- **Gateway:** 10.0.20.1
+- **Reglas Firewall:**
+  - DMZ → WAN: Solo puerto 443 (HTTPS)
+  - DMZ → LAN: Bloqueado por defecto
+  - LAN → DMZ: Solo administración específica
 
-  40      10.0.20.0/24     10.0.30.1            IoT
+#### VLAN 30 — Servidores (10.0.30.0/24)
 
-  99      10.0.99.0/24     10.0.99.1            MNGMNT
+- **Propósito:** Contenedores internos (DNS, monitorización, servicios auxiliares)
+- **Acceso:** Restringido a redes autorizadas
+- **Características:** Hospeda infraestructura crítica
+- **Gateway:** 10.0.30.1
+- **Servicios:** BIND9 (DNS), Uptime Kuma, contenedores CT
 
-100     10.0.100.0/24    10.0.100.1           VPN
-  ------------------------------------------------------------------------
+#### VLAN 40 — IoT (10.0.40.0/24)
 
-##### VLAN 1 --- LAN (10.0.1.0/24, GW 10.0.1.1)
+- **Propósito:** Aislamiento de dispositivos IoT con firmware limitado
+- **Acceso:** Acceso restrictivo a otras VLANs
+- **Características:** Control de broadcast/multicast
+- **Gateway:** 10.0.40.1
+- **Restricciones:** Excepciones justificadas solo para servicios específicos
 
-Segmento principal de la red, destinado a los dispositivos de uso
-general. Proporciona acceso completo a los servicios internos y a
-Internet. Actúa como red base para equipos de usuario y sistemas que
-requieren conectividad amplia. El rúter gestiona el enrutamiento hacia
-el resto de subredes y aplica las políticas estándar de salida.
+#### VLAN 99 — Management (10.0.99.0/24)
 
-##### VLAN 2 --- Alarma (10.0.2.0/29, GW 10.0.2.1)
+- **Propósito:** Administración exclusiva de infraestructura
+- **Acceso:** Solo desde equipos autorizados
+- **Características:** Aísla plano de control del resto de redes
+- **Gateway:** 10.0.99.1
+- **Dispositivos:** Switch, firewall, Proxmox, UniFi OS, controladores
+- **Nota crítica:** El acceso a switch se restringe únicamente a VLAN 99
 
-Segmento aislado diseñado para alojar exclusivamente el dispositivo de
-alarma. Utiliza un rango reducido para limitar la superficie de
-exposición. Solo se permite el tráfico necesario para su funcionamiento
-(principalmente comunicación saliente hacia los servidores del
-proveedor). No se autoriza acceso a otros segmentos internos.
+#### VLAN 100 — VPN (10.0.100.0/24)
+
+- **Propósito:** Acceso remoto de clientes VPN
+- **Acceso:** Control granular según políticas específicas
+- **Características:** Identifica y segmenta tráfico externo
+- **Gateway:** 10.0.100.1
 
-##### VLAN 20 --- DMZ (10.0.20.0/24, GW 10.0.20.1)
+---
 
-Subred destinada a servicios accesibles desde Internet. Su función es
-aislar máquinas expuestas del resto de la infraestructura. El tráfico
-entrante desde WAN termina aquí, aplicando reglas estrictas de control.
-Las comunicaciones hacia otras VLAN se limitan a operaciones esenciales
-definidas previamente.
+## Dispositivos de Infraestructura
+
+### Switch Principal: TP-Link TL-SG2008
 
-##### VLAN 30 --- Servidores (10.0.30.0/24, GW 10.0.30.1)
-
-Segmento destinado a servidores internos: almacenamiento, servicios
-auxiliares, automatización y contenedores. La comunicación con esta VLAN
-está restringida a redes autorizadas. Solo se permite tráfico
-explícitamente definido para garantizar la integridad y estabilidad de
-los servicios.
+| Atributo | Valor |
+|----------|-------|
+| Modelo | TP-Link TL-SG2008 |
+| Puertos | 8 puertos Gigabit |
+| VLAN Nativas | 1, 20, 30, 40, 99, 100 |
+| Gestión | VLAN 99 (10.0.99.X) |
+| Puertos Trunk | Hacia OPNsense, Proxmox |
+| Estado | Activo |
 
-##### VLAN 40 --- IoT (10.0.40.0/24, GW 10.0.40.1)
-
-Subred dedicada a dispositivos IoT. Su objetivo es aislar equipos con
-firmware limitado o comportamiento de red impredecible. El acceso a
-otras VLAN se restringe de forma estricta, permitiéndose únicamente
-excepciones justificadas (por ejemplo, acceso a servicios concretos en
-la VLAN de Servidores). El tráfico multicast y broadcast se controla
-para evitar propagación innecesaria.
+**Nota:** La interfaz de gestión del switch debe estar en VLAN 99, nunca en VLAN 1.
 
-##### VLAN 99 --- Management (10.0.99.0/24, GW 10.0.99.1)
-
-Red reservada para la administración de dispositivos de infraestructura
-(switches, puntos de acceso, controlador, firewall, nodos Proxmox). Solo
-se permite el acceso desde equipos autorizados. Se usa exclusivamente
-para tareas de gestión y no aloja dispositivos de uso cotidiano. Aísla
-el plano de control del resto de redes operativas.
-
-##### VLAN 100 --- VPN (10.0.100.0/24, GW 10.0.100.1)
-
-Segmento asignado a clientes conectados por VPN. Permite identificar y
-controlar el tráfico procedente del exterior de la red local. Desde esta
-VLAN se aplican políticas específicas que determinan qué recursos
-internos son accesibles. Facilita el acceso remoto seguro a servicios
-internos sin exponer la red completa.
-
-#### Conclusión
-
-La implementación de VLANs en la red doméstica permite mantener un
-equilibrio entre seguridad, rendimiento y facilidad de gestión. Cada
-segmento cumple una función específica, desde la LAN principal hasta la
-VLAN de gestión y la red VPN, asegurando que los dispositivos críticos
-estén protegidos y que el tráfico de la red se mantenga optimizado.
+### Firewall/Router: OPNsense
 
-Esta estructura segmentada proporciona una **base sólida para la
-administración de la red**, facilitando futuras expansiones y
-adaptaciones sin comprometer la seguridad ni el rendimiento. La
-documentación detallada de las VLANs, sus rangos de IP, puertas de
-enlace y funciones asociadas, sirve como referencia clara para la
-gestión cotidiana y para cualquier actualización o ampliación de la
-infraestructura de red.
+| Atributo | Valor |
+|----------|-------|
+| Software | OPNsense |
+| Función | Enrutamiento, firewall, DHCP |
+| VLANs Gestionadas | Todas (1-100) |
+| Gestión | VLAN 99 (10.0.99.X) |
+| Acceso WAN | A través de gateway ISP |
+| Estado | Activo |
 
-##
+### Virtualización: Proxmox
 
-## Dispositivos y Servicios
+| Atributo | Valor |
+|----------|-------|
+| Nodo | Apollo |
+| Función | Host para contenedores (CT) |
+| Sistema | Debian |
+| VLAN Gestión | VLAN 99 |
+| IP Gestión | 10.0.99.101/24 |
+| Capacidad | CPU, RAM, almacenamiento (ver planificación) |
+| Estado | Activo |
 
-**Fecha de actualización:** 2026-01-03\
-**Descripción:** Inventario y documentación de nodos, dispositivos y
-servicios, con configuraciones clave, IPs, VLANs y funciones
-principales.
+---
 
-### Resumen de Nodos
+## Servicios y Contenedores
 
-  ------------------------------------------------------------------------------------
-  **Nodo**   **ID**   **Debian**   **Función         **Estado**     **Notas rápidas**
-                                   principal**
-  ---------- -------- ------------ ----------------- -------------- ------------------
-  ZEUS       101      13.2         Controlador Omada 🟢 Actualizado Gestión de APs y
-                                                                    switches
+### Resumen de Servicios
 
-  ZEUS       102      13.2         Monitorización    🟢 Actualizado Uptime interno /
-                                   servicios                        alertas
+| CT/Servicio | Nodo | VLAN | IP | Función | Estado |
+|-------------|------|------|-----|---------|--------|
+| Omada | Proxmox | 99 | 10.0.99.10 | Gestión centralizada de switches Omada | 🟢 |
+| UniFi OS | Proxmox | 99 | 10.0.99.12 | Gestión centralizada de APs UniFi | 🟢 |
+| DNS (NS1) | Proxmox | 30 | 10.0.30.10 | Servidor DNS primario | 🟢 |
+| DNS (NS2) | Proxmox | 30 | 10.0.30.11 | Servidor DNS secundario | 🟢 |
+| Uptime Kuma | Proxmox | 30 | 10.0.30.X | Monitorización de servicios | 🟢 |
+| NPM | Proxmox | 20 | 10.0.20.10 | Nginx Proxy Manager (DMZ) | 🟢 |
+| Zigbee2MQTT | Proxmox | 30 | 10.0.30.13 | Puente Zigbee → MQTT | 🟢 |
 
-  ZEUS       103      13.2         Servidor DNS      🟢 Actualizado Zonas internas y
-                                   principal                        externas
+### Servicios DNS
 
-  ZEUS       202      13.2         Servidor web /    🟢 Actualizado Proxy inverso
-                                   proxy inverso                    multi-dominio
+**NS1 (Primario)**
 
-  HERMES     104      13.2         Servidor CUPS     🟢 Actualizado Impresión en red
+- **VLAN:** 30
+- **Software:** BIND9
+- **Función:** Resolución interna y externa
+- **Zonas:** Internas (lab.local, etc.) + delegadas
+- **Backup:** Semanal
 
-  HERMES     201      13.2         Zigbee2MQTT +     🟢 Actualizado Domótica y MQTT
-                                   MQTT
+**NS2 (Secundario)**
 
-HERMES     203      13.2         Servidor DNS      🟢 Actualizado Redundancia DNS
-                                   secundario
-  ------------------------------------------------------------------------------------
+- **VLAN:** 30
+- **Software:** BIND9
+- **Función:** Redundancia DNS
+- **Sincronización:** Transferencias de zona desde NS1
 
-### Detalle de Dispositivos y Servicios
+### Gestión Omada
 
-##### Nodo ZEUS
+- **VLAN:** 99
+- **Software:** Omada Controller
+- **Función:** Gestión centralizada de switches Omada (TP-Link TL-SG2008)
+- **Acceso:** Web UI y API
+- **Integración:** Control de VLANs, puertos, trunk y políticas de red en switches
 
-  ---------------------------------------------------------------------------------------------------------------
-  **Servicio**   **Modelo /   **Función /      **IP**         **VLAN / **Servicios que   **Estado**   **Notas**
-                 Software**   Descripción**                   Red**    provee**
-  -------------- ------------ ---------------- -------------- -------- ----------------- ------------ -----------
-  Omada          Omada        Gestión          192.168.1.10   Admin 10 Gestión de APs,   🟢
-                 Controller   centralizada de                 / WiFi   SSIDs, VLANs
-                              APs y switches                  20
+### Gestión UniFi OS
 
-  Uptime Kuma    Uptime Kuma  Monitorización   192.168.1.20   Admin 10 Uptime y alertas  🟢
-                              de servicios                             (correo /
-                              internos y                               Telegram)
-                              externos
+- **VLAN:** 99
+- **Software:** UniFi OS
+- **Función:** Gestión centralizada de APs UniFi
+- **Acceso:** Web UI, SSH y API
+- **Integración:** Control de SSIDs, banda ancha, roaming y políticas de WiFi
 
-  NS1            BIND9        Servidor DNS     192.168.1.5    Admin 10 DNS interno y     🟢
-                              principal                                externo,
-                                                                       resolución
-                                                                       recursiva
+### Monitorización: Uptime Kuma
 
-NPM            Nginx Proxy  Proxy inverso /  192.168.1.15   Admin 10 Proxy inverso,    🟢
-                 Manager      Servidor web                             HTTPS,
-                                                                       redirección de
-                                                                       dominios
-  ---------------------------------------------------------------------------------------------------------------
+- **VLAN:** 30
+- **Función:** Monitoreo de servicios internos y externos
+- **Alertas:** Correo, Telegram
+- **Frecuencia:** Chequeos cada 1-5 minutos según servicio
 
-##### Nodo HERMES
+### Proxy Inverso: Nginx Proxy Manager (NPM)
 
-  -------------------------------------------------------------------------------------------------------------------
-  **Dispositivo / **Modelo /    **Función /      **IP**         **VLAN / **Servicios que     **Estado**   **Notas**
-  Servicio**      Software**    Descripción**                   Red**    provee**
-  --------------- ------------- ---------------- -------------- -------- ------------------- ------------ -----------
-  CUPS            CUPS 2.x /    Servidor de      192.168.1.30   Admin 10 Impresión en red,   🟢
-                  Debian 13.2   impresión en red                         administración de
-                                                                         trabajos
+- **VLAN:** 20 (DMZ)
+- **Función:** Exposición segura de servicios a internet
+- **Certificados:** Let's Encrypt (HTTPS automático)
+- **Redireccionamiento:** Multi-dominio
+- **Dependencia:** NS1/NS2 para resolución de nombres
 
-  Z2M             Zigbee2MQTT / Integración de   192.168.1.25   Admin 10 MQTT para domótica, 🟢
-                  Debian 13.2   dispositivos                             comunicación Zigbee
-                                Zigbee a MQTT
+### Domótica: Zigbee2MQTT
 
-NS2             Debian 13.2   Servidor DNS     192.168.1.6    Admin 10 DNS secundario,     🟢
-                                secundario                               redundancia y alta
-                                                                         disponibilidad
-  -------------------------------------------------------------------------------------------------------------------
+- **VLAN:** 30
+- **Función:** Integración de dispositivos Zigbee vía MQTT
+- **Broker:** MQTT interno
+- **Dispositivos:** Sensores, controles Zigbee
 
-### Topología de Red
+---
 
-- Todos los nodos ZEUS y HERMES conectados al switch principal de
-    administración (VLAN 10)
+## Seguridad y Firewall
 
-- Comunicación clave:
+### Políticas Generales
 
-  - DNS: ns1 ↔ ns2
+1. **Principio de mínimo privilegio:** Solo tráfico explícitamente permitido
+2. **Segregación por VLAN:** Cada segmento aislado por defecto
+3. **Inspección de tráfico:** OPNsense inspecciona tráfico inter-VLAN
+4. **Logs:** Todos los cambios de política se registran
 
-  - MQTT: z2m ↔ otros dispositivos Zigbee
+### Reglas de Firewall Principales
 
-  - Proxy inverso: npm → acceso web interno/externo
+#### Entrada (Inbound)
 
-- **Recomendación en Word:** Insertar un diagrama simple usando
-    "Insertar → Formas → Cuadros y flechas" o importar un PNG de
-    Draw.io.
+| Origen | Destino | Puerto | Protocolo | Acción | Nota |
+|--------|---------|--------|-----------|--------|------|
+| WAN | DMZ | 443 | TCP | Permitir | HTTPS externo |
+| WAN | DMZ | 80 | TCP | Permitir | HTTP redirección |
+| VLAN 1 | VLAN 99 | 22,443 | TCP | Permitir | Admin SSH/Web |
+| VLAN 1 | VLAN 30 | 53 | UDP,TCP | Permitir | DNS |
 
-### Procedimientos y Notas
+#### Salida (Outbound)
 
-- **Backups:**
+| Origen | Destino | Puerto | Protocolo | Acción | Nota |
+|--------|---------|--------|-----------|--------|------|
+| VLAN 2 | WAN | 443,80 | TCP | Permitir | Alarma a servidor |
+| VLAN 40 | VLAN 30 | 1883 | TCP | Permitir | IoT → MQTT |
+| VLAN 40 | VLAN 1 | Todos | Todos | Bloquear | IoT aislado |
+| VLAN 100 | VLAN 30,1 | Selectivo | TCP | Permitir | VPN acceso controlado |
 
-  - Omada → copia de configuración semanal
+### Acceso Administrativo
 
-  - NS1 / NS2 → backup de zonas DNS 24h
+- **VLAN 99:** Única red para administración
+- **Dispositivos críticos:** Acceso SSH key-based + 2FA (cuando aplique)
+- **Switch management:** Solo desde VLAN 99
+- **Firewall:** Acceso solo desde VLAN 99/LAN
 
-  - Z2M → backup de topics MQTT y configuración Zigbee
+---
 
-- **Actualizaciones:**
+## Monitorización y Alertas
 
-  - Todos los nodos corren Debian 13.2 → revisar paquetes críticos
-        semanalmente
+### Herramientas
 
-- **Resolución de problemas comunes:**
+- **Uptime Kuma:** Monitorización de servicios (HTTP/HTTPS, ping, TCP)
+- **Logs:** Centralizados en dispositivos (revisar `/var/log`)
+- **Alertas:** Correo, Telegram para incidentes críticos
 
-  - Servicio caído → revisar logs /var/log/\[servicio\].log
+### Servicios Monitoreados
 
-  - Problema de comunicación → revisar VLANs, IPs, firewall interno
+- DNS (NS1, NS2)
+- NPM (disponibilidad web)
+- Proxmox (estado de host)
+- OPNsense (estado del firewall)
+- Conectividad WAN
 
-- **Dependencias:**
+### Procedimiento de Alertas
 
-  - NPM depende de NS1/NS2 para resolución de nombres
+1. Detección de caída de servicio
+2. Notificación inmediata (correo, Telegram)
+3. Verificación manual de causa
+4. Documentación en incidente (INC-YYYY-NNNN.md)
+5. Resolución y validación post-cambio
 
-  - Z2M depende de MQTT y de dispositivos Zigbee conectados
+---
 
-### Historial de Cambios
+## Backup y Recuperación
 
-  ----------------------------------------------------------------------------
-  **Fecha**    **Nodo /          **Cambio realizado**        **Responsable**
-               Servicio**
-  ------------ ----------------- --------------------------- -----------------
-  2026-01-03   ZEUS / Omada      Actualización a Debian 13.2 Alejandro
+### Estrategia de Backups
 
-2026-01-03   HERMES / Z2M      Añadido nuevo topic MQTT    Alejandro
-  ----------------------------------------------------------------------------
+| Componente | Frecuencia | Método | Ubicación | RPO |
+|-----------|-----------|--------|-----------|------|
+| Proxmox CTs | Semanal | Snapshot | Storage local | 7 días |
+| Configuración Firewall | Mensual | Exportación | Repositorio git | 30 días |
+| Zonas DNS | Diaria | Backup de ficheros | Proxmox storage | 1 día |
+| UniFi OS | Semanal | Exportación config | Storage local | 7 días |
 
-# Seguridad y Firewall
+### Procedimiento de Recuperación
 
-- Políticas implementadas.
+1. **Identificar componente afectado**
+2. **Localizar último backup válido**
+3. **Restaurar según procedimiento** (CT snapshot, exportación, etc.)
+4. **Validar funcionamiento** (ping, SSH, servicios)
+5. **Documentar en RFC si es cambio** o en INC si es incidente
 
-- Reglas de firewall principales.
+---
 
-- Segmentación y control de acceso.
+## Procedimientos (SOP)
 
-# Monitorización y Alertas
+### Cambios en la Infraestructura
 
-- Herramientas usadas (Uptime Kuma, Prometheus, etc.).
+Toda modificación debe documentarse en [RFC](rfc/):
 
-- Procedimientos para monitorizar servicios y equipos.
+1. Crear RFC en `rfc/propuestas/` usando [template](templates/RFC.md)
+2. Detallar: cambios, riesgos, rollback, validaciones
+3. Ejecutar cambio siguiendo plan de acción
+4. Mover RFC a `rfc/completadas/` con resultado actual
+5. Actualizar `Doc-Red.md` si aplica
 
-##
+### Mantenimiento Rutinario
 
-# Backup y Recuperación
+Registrar en [MNT](mnt/) usando [template](templates/MNT.md):
 
-- Estrategias de backup.
+- Actualizaciones de paquetes
+- Limpiezas de almacenamiento
+- Rotación de logs
+- Tests de backup
 
-- Procedimientos para recuperación ante fallos.
+### Incidentes y Problemas
 
-# Procesos y Procedimientos (SOP)
+Registrar en [INC](inc/) usando [template](templates/INC.md):
 
-- Procedimientos estándar para cambios, actualizaciones, incidencias.
+- Descripción del problema
+- Timeline de detección y acciones
+- Causa raíz identificada
+- Resolución aplicada
+- Lecciones aprendidas
 
-# Bitácora de cambios
+---
 
-- Listado de RFCs implementados y en curso.
+## Historial de Cambios
 
-- Historial de cambios en la infraestructura.
+### RFCs Completadas (Muestra)
 
-# Referencias y Recursos
+| RFC | Título | Fecha | Criticidad | Estado |
+|-----|--------|-------|-----------|--------|
+| RFC-2025-0001-NET | Migración de Apollo a VLAN 99 | 2025-07-16 | Alta | ✓ |
+| RFC-2025-0006-NET | Creación DMZ (VLAN 20) | 2025-07-30 | Media | ✓ |
+| RFC-2025-0012-NET | Gestión switch a VLAN 99 | 2025-08-08 | Media | ✓ |
+| RFC-2026-0002-NET | Instalación CT UniFi OS | 2026-01-28 | Media | ✓ |
 
-- Documentación oficial de equipos y software.
+Consulta [rfc/completadas](rfc/completadas/) para lista completa y detalles.
 
-- Enlaces a repositorios, scripts, y manuales internos.
+### Cambios Recientes (Últimos 30 días)
 
-### **Cómo empezar**
+- **2026-01-28:** Instalación de UniFi OS (RFC-2026-0002-NET)
 
-1. **Reúne toda la información básica:** inventario de equipos,
-    esquemas de red, configuraciones actuales.
+---
 
-2. **Crea diagramas visuales:** usa herramientas como draw.io,
-    diagrams.net o cualquier software de diagramas.
+## Contacto y Referencias
 
-3. **Escribe resúmenes claros para cada sección.\
-    **
+- **Administrador:** Alejandro Martín Pérez
+- **Repositorio:** GitHub homelab-docs
+- **Documentación Oficial:**
+  - [OPNsense](https://docs.opnsense.org/)
+  - [Proxmox](https://pve.proxmox.com/wiki/Main_Page)
+  - [UniFi](https://help.ui.com/)
+  - [TP-Link TL-SG2008](https://www.tp-link.com/es/business/managed-switch/tl-sg2008/)
 
-4. **Documenta procedimientos y scripts importantes.\
-    **
+---
 
-5. **Mantén la documentación viva:** revisa y actualiza regularmente.
+**Próxima revisión programada:** 28 de febrero de 2026
