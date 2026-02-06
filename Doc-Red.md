@@ -371,12 +371,14 @@ Registrar en [INC](inc/) usando [template](templates/INC.md):
 | RFC-2025-0006-NET | Creación DMZ (VLAN 20) | 2025-07-30 | Media | ✓ |
 | RFC-2025-0012-NET | Gestión switch a VLAN 99 | 2025-08-08 | Media | ✓ |
 | RFC-2026-0002-NET | Instalación CT UniFi OS | 2026-01-28 | Media | ✓ |
+| RFC-2026-0003-NET | Migración de DHCP normal a Kea en OPNsense 25.7.11_9 | 2026-02-06 | Media | ✓ |
 
 Consulta [rfc/completadas](rfc/completadas/) para lista completa y detalles.
 
 ### Cambios Recientes (Últimos 30 días)
 
 - **2026-01-28:** Instalación de UniFi OS (RFC-2026-0002-NET)
+- **2026-02-06:** Migración de DHCP a Kea en OPNsense (RFC-2026-0003-NET)
 
 ---
 
