@@ -1,6 +1,6 @@
 # Documentación de Infraestructura de Red
 
-**Última actualización:** 28 de enero de 2026  
+**Última actualización:** 7 de febrero de 2026  
 **Responsable:** Alejandro Martín Pérez
 
 ---
@@ -157,6 +157,8 @@ La segmentación mediante VLANs es esencial para:
 | Gestión | VLAN 99 (10.0.99.X) |
 | Acceso WAN | A través de gateway ISP |
 | Estado | Activo |
+
+**Nota reciente:** tras la actualización a OPNsense 26.1 (MNT-2026-0002-NET) el servicio DHCP normal corre sobre **Kea DHCP** en todas las VLANs excepto la VLAN PXE. ISC DHCP legacy permanece únicamente en ese segmento para evitar interrupciones en clientes PXE mientras Kea gestiona los rangos LAN, alarma, DMZ, servidores, IoT, management y VPN.
 
 ### Virtualización: Proxmox
 
@@ -375,10 +377,21 @@ Registrar en [INC](inc/) usando [template](templates/INC.md):
 
 Consulta [rfc/completadas](rfc/completadas/) para lista completa y detalles.
 
+### Mantenimientos Completados (MNT)
+
+| MNT | Título | Fecha | Criticidad | Estado |
+|-----|--------|-------|-----------|--------|
+| MNT-2026-0001-NET | Actualización Omada Controller 6.0.0.25 a 6.1.0.19 | 2026-01-29 | Media | ✓ |
+| MNT-2026-0002-NET | Actualización de OPNsense a 26.1 | 2026-01-30 | Media | ✓ |
+
+Consulta [mnt/completadas](mnt/completadas/) para lista completa y detalles.
+
 ### Cambios Recientes (Últimos 30 días)
 
 - **2026-01-28:** Instalación de UniFi OS (RFC-2026-0002-NET)
+- **2026-01-29:** Actualización Omada Controller (MNT-2026-0001-NET)
 - **2026-02-06:** Migración de DHCP a Kea en OPNsense (RFC-2026-0003-NET)
+- **2026-02-07:** Actualización de OPNsense a 26.1 (MNT-2026-0002-NET)
 
 ---
 
