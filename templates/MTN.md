@@ -27,6 +27,7 @@ Descripción breve de la tarea de mantenimiento.
 - Actualización de paquetes
 - Reinicio de servicios
 - Limpieza / ajustes menores
+- Cambios DNS: `<host>` `<tipo>` `<destino>` (motivo) — Inventario sync en `Doc-Red/Servicios.md`
 
 ---
 
@@ -35,6 +36,7 @@ Descripción breve de la tarea de mantenimiento.
 - [ ] Servicio operativo
 - [ ] Logs sin errores
 - [ ] Conectividad correcta
+- [ ] DNS resuelve (`dig <host> @ns1/ns2`) y servicio ok
 
 ---
 

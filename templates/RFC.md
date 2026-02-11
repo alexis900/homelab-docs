@@ -53,6 +53,14 @@ El cambio afecta a la administración de la red doméstica. Un fallo podría dej
 
 ---
 
+## Cambios DNS (si aplica)
+
+- Entrada: `<host>` `<tipo>` `<destino>` (motivo: <razón>)
+- Validación: `dig <host> @ns1` / servicio accesible
+- Inventario actualizado en `Doc-Red/Servicios.md`
+
+---
+
 ## Riesgos
 
 - Pérdida temporal de acceso al switch.  
