@@ -1,6 +1,6 @@
 # Documentación de Infraestructura de Red
 
-**Última actualización:** 7 de febrero de 2026  
+**Última actualización:** 11 de febrero de 2026  
 **Responsable:** Alejandro Martín Pérez
 
 ---
@@ -43,7 +43,7 @@ La red doméstica utiliza una arquitectura de **segmentación por VLANs** con un
 | Virtualización | Proxmox | Host para contenedores (CT) | 99 |
 | Gestión Omada | Omada (CT) | Gestión centralizada de switches Omada | 99 |
 | Gestión UniFi | UniFi OS (CT) | Gestión centralizada de APs UniFi | 99 |
-| Monitorización | Uptime Kuma (CT) | Monitorización de servicios y alertas | 30 |
+| Monitorización | Uptime Kuma (Docker en CT Proxmox) | Monitorización de servicios y alertas | 99 |
 
 ---
 
@@ -67,7 +67,7 @@ La segmentación mediante VLANs es esencial para:
 | 20 | DMZ | 10.0.20.0/24 | 10.0.20.1 | Servicios expuestos a internet |
 | 30 | Servidores | 10.0.30.0/24 | 10.0.30.1 | Contenedores, almacenamiento, servicios internos |
 | 40 | IoT | 10.0.40.0/24 | 10.0.40.1 | Dispositivos IoT (firmware limitado) |
-| 99 | Management | 10.0.99.0/24 | 10.0.99.1 | Infraestructura: switches, firewall, virtualizadores |
+| 99 | Management | 10.0.99.0/24 | 10.0.99.1 | Infraestructura: switches, firewall, virtualizadores, monitorización |
 | 100 | VPN | 10.0.100.0/24 | 10.0.100.1 | Clientes remotos (acceso VPN) |
 
 ### Descripción Detallada de VLANs
@@ -104,7 +104,7 @@ La segmentación mediante VLANs es esencial para:
 - **Acceso:** Restringido a redes autorizadas
 - **Características:** Hospeda infraestructura crítica
 - **Gateway:** 10.0.30.1
-- **Servicios:** BIND9 (DNS), Uptime Kuma, contenedores CT
+- **Servicios:** BIND9 (DNS), contenedores CT
 
 #### VLAN 40 — IoT (10.0.40.0/24)
 
@@ -120,7 +120,7 @@ La segmentación mediante VLANs es esencial para:
 - **Acceso:** Solo desde equipos autorizados
 - **Características:** Aísla plano de control del resto de redes
 - **Gateway:** 10.0.99.1
-- **Dispositivos:** Switch, firewall, Proxmox, UniFi OS, controladores
+- **Dispositivos:** Switch, firewall, Proxmox, UniFi OS, controladores, Uptime Kuma
 - **Nota crítica:** El acceso a switch se restringe únicamente a VLAN 99
 
 #### VLAN 100 — VPN (10.0.100.0/24)
@@ -158,7 +158,7 @@ La segmentación mediante VLANs es esencial para:
 | Acceso WAN | A través de gateway ISP |
 | Estado | Activo |
 
-**Nota reciente:** tras la actualización a OPNsense 26.1 (MNT-2026-0002-NET) el servicio DHCP normal corre sobre **Kea DHCP** en todas las VLANs excepto la VLAN PXE. ISC DHCP legacy permanece únicamente en ese segmento para evitar interrupciones en clientes PXE mientras Kea gestiona los rangos LAN, alarma, DMZ, servidores, IoT, management y VPN.
+**Nota reciente:** tras la actualización a OPNsense 26.1 (MNT-2026-0002-NET) el servicio DHCP normal corre sobre **Kea DHCP** en todas las VLANs. ISC DHCP legacy está desactivado y PXE aún no se ha configurado (pendiente de RFC específico).
 
 ### Virtualización: Proxmox
 
@@ -184,7 +184,7 @@ La segmentación mediante VLANs es esencial para:
 | UniFi OS | Proxmox | 99 | 10.0.99.12 | Gestión centralizada de APs UniFi | 🟢 |
 | DNS (NS1) | Proxmox | 30 | 10.0.30.10 | Servidor DNS primario | 🟢 |
 | DNS (NS2) | Proxmox | 30 | 10.0.30.11 | Servidor DNS secundario | 🟢 |
-| Uptime Kuma | Proxmox | 30 | 10.0.30.X | Monitorización de servicios | 🟢 |
+| Uptime Kuma | Proxmox (Docker en CT) | 99 | 10.0.99.20 | Monitorización de servicios (uptime.home.arpa) | 🟢 |
 | NPM | Proxmox | 20 | 10.0.20.10 | Nginx Proxy Manager (DMZ) | 🟢 |
 | Zigbee2MQTT | Proxmox | 30 | 10.0.30.13 | Puente Zigbee → MQTT | 🟢 |
 
@@ -205,6 +205,20 @@ La segmentación mediante VLANs es esencial para:
 - **Función:** Redundancia DNS
 - **Sincronización:** Transferencias de zona desde NS1
 
+### Entradas DNS internas (inventario)
+
+| Hostname | IP | VLAN | Descripción | Estado |
+|----------|----|------|-------------|--------|
+| uptime.home.arpa | 10.0.99.20 | 99 | Uptime Kuma (monitorización) | Activo |
+| ns1.home.arpa (NS1) | 10.0.30.10 | 30 | Servidor DNS primario | Activo |
+| ns2.home.arpa (NS2) | 10.0.30.11 | 30 | Servidor DNS secundario | Activo |
+| omada.home.arpa | 10.0.99.10 | 99 | Controlador Omada | Activo |
+| unifi.home.arpa | 10.0.99.12 | 99 | Controlador UniFi OS | Activo |
+| npm.home.arpa | 10.0.20.10 | 20 | Nginx Proxy Manager (DMZ) | Activo |
+| zigbee2mqtt.home.arpa | 10.0.30.13 | 30 | Puente Zigbee (Z2M) → MQTT | Activo |
+
+> Añadir/actualizar esta tabla cuando se creen nuevos registros o cambien IPs/hostnames.
+
 ### Gestión Omada
 
 - **VLAN:** 99
@@ -212,6 +226,10 @@ La segmentación mediante VLANs es esencial para:
 - **Función:** Gestión centralizada de switches Omada (TP-Link TL-SG2008)
 - **Acceso:** Web UI y API
 - **Integración:** Control de VLANs, puertos, trunk y políticas de red en switches
+- **Switches gestionados:**
+  - **TP-Link TL-SG2008** (switch principal, core, en producción)
+  - **TP-Link Omada SG205GP #1** (switch secundario, adoptado y operativo; administración en VLAN 99)
+  - **TP-Link Omada SG205GP #2** (switch secundario, adoptado y operativo; administración en VLAN 99)
 
 ### Gestión UniFi OS
 
@@ -220,13 +238,26 @@ La segmentación mediante VLANs es esencial para:
 - **Función:** Gestión centralizada de APs UniFi
 - **Acceso:** Web UI, SSH y API
 - **Integración:** Control de SSIDs, banda ancha, roaming y políticas de WiFi
+- **APs desplegados (U7 Lite, 31/01/2026):**
+  - AP-1 — VLAN 1 (LAN), IP 10.0.1.250
+  - AP-2 — VLAN 1 (LAN), IP 10.0.1.252
+  - **Pendiente:** Migrar gestión de APs a VLAN 99 (RFC-2026-0007-WIFI)
+  
+#### SSIDs
+
+| SSID | VLAN / Tag | Bandas | Seguridad | Aislamiento | Propósito | APs |
+|------|------------|--------|-----------|------------|-----------|-----|
+| LAN | 1 (untagged) | 2.4 GHz, 5 GHz | WPA2/WPA3 Personal (mixto) | Desactivado | Acceso general de usuarios | AP-1, AP-2 |
+| IoT | 40 (tagged) | 2.4 GHz | WPA2 Personal | Activado (cliente-cliente bloqueado) | Dispositivos IoT aislados | AP-1, AP-2 |
 
 ### Monitorización: Uptime Kuma
 
-- **VLAN:** 30
+- **VLAN:** 99
+- **Despliegue:** Contenedor Docker dentro de un CT en nodo Proxmox
 - **Función:** Monitoreo de servicios internos y externos
 - **Alertas:** Correo, Telegram
 - **Frecuencia:** Chequeos cada 1-5 minutos según servicio
+- **Estado futuro:** Netdata pendiente de despliegue para métricas de sistema
 
 ### Proxy Inverso: Nginx Proxy Manager (NPM)
 
@@ -369,11 +400,14 @@ Registrar en [INC](inc/) usando [template](templates/INC.md):
 
 | RFC | Título | Fecha | Criticidad | Estado |
 |-----|--------|-------|-----------|--------|
-| RFC-2025-0001-NET | Migración de Apollo a VLAN 99 | 2025-07-16 | Alta | ✓ |
-| RFC-2025-0006-NET | Creación DMZ (VLAN 20) | 2025-07-30 | Media | ✓ |
-| RFC-2025-0012-NET | Gestión switch a VLAN 99 | 2025-08-08 | Media | ✓ |
-| RFC-2026-0002-NET | Instalación CT UniFi OS | 2026-01-28 | Media | ✓ |
+| RFC-2026-0005-INFRA | Despliegue de dos switches Omada SG205GP | 2026-02-11 | Media | ✓ |
+| RFC-2026-0004-MON | Migración de Uptime Kuma a contenedor Docker | 2026-02-11 | Media | ✓ |
 | RFC-2026-0003-NET | Migración de DHCP normal a Kea en OPNsense 25.7.11_9 | 2026-02-06 | Media | ✓ |
+| RFC-2026-0006-WIFI | Instalación y adopción de APs UniFi U7 Lite | 2026-01-31 | Media | ✓ |
+| RFC-2026-0002-NET | Instalación CT UniFi OS | 2026-01-28 | Media | ✓ |
+| RFC-2025-0012-NET | Gestión switch a VLAN 99 | 2025-08-08 | Media | ✓ |
+| RFC-2025-0006-NET | Creación DMZ (VLAN 20) | 2025-07-30 | Media | ✓ |
+| RFC-2025-0001-NET | Migración de Apollo a VLAN 99 | 2025-07-16 | Alta | ✓ |
 
 Consulta [rfc/completadas](rfc/completadas/) para lista completa y detalles.
 
@@ -388,10 +422,20 @@ Consulta [mnt/completadas](mnt/completadas/) para lista completa y detalles.
 
 ### Cambios Recientes (Últimos 30 días)
 
-- **2026-01-28:** Instalación de UniFi OS (RFC-2026-0002-NET)
-- **2026-01-29:** Actualización Omada Controller (MNT-2026-0001-NET)
-- **2026-02-06:** Migración de DHCP a Kea en OPNsense (RFC-2026-0003-NET)
+- **2026-02-11:** Migración de Uptime Kuma a contenedor Docker (RFC-2026-0004-MON)
+- **2026-02-11:** Despliegue de dos switches Omada SG205GP (RFC-2026-0005-INFRA)
 - **2026-02-07:** Actualización de OPNsense a 26.1 (MNT-2026-0002-NET)
+- **2026-02-06:** Migración de DHCP a Kea en OPNsense (RFC-2026-0003-NET)
+- **2026-01-31:** Instalación y adopción de APs UniFi U7 Lite (RFC-2026-0006-WIFI)
+- **2026-01-29:** Actualización Omada Controller (MNT-2026-0001-NET)
+- **2026-01-28:** Instalación de UniFi OS (RFC-2026-0002-NET)
+
+### Cambios Planificados / Pendientes
+
+- **(Prioridad media)** RFC-2025-0020-SRV (Propuesta, 2025-11-16): Instalación de servidor CUPS en VLAN de servidores y migración de impresora Epson M100 Ecotank.
+- **(Prioridad media)** MNT-2026-0003-NET (Planificado, 2026-02-07): Actualización de UniFi Network Application 10.0.162 → 10.1.83 en el controlador UniFi OS; incluye backup previo, actualización y validaciones de servicio.
+- **(Prioridad media)** RFC-2026-0007-WIFI (Propuesta, 2026-02-11): Migrar gestión de APs UniFi U7 Lite a VLAN 99. Gestión actual en VLAN 1 (10.0.1.250 / 10.0.1.252); pendiente reservar IPs en 10.0.99.x y ejecutar plan.
+- **(Prioridad baja)** RFC-2025-0015-INFRA (Propuesta, 2025-09-27): Instalación de dos enchufes Schuko y una toma RJ45 Cat6a en canaleta empotrada.
 
 ---
 
