@@ -57,6 +57,8 @@
 | core-sw01.home.arpa | 10.0.99.200 | 99 | Switch core TL-SG2008 | Activo |
 | em-sw01.home.arpa | 10.0.99.202 | 99 | Switch Omada SG205GP #1 | Activo |
 | em-sw02.home.arpa | 10.0.99.204 | 99 | Switch Omada SG205GP #2 | Activo |
+| caddy-zeus.home.arpa | 10.0.99.x | 99 | CT Caddy (proxy interno, nodo Zeus) | Planificado |
+| caddy-hermes.home.arpa | 10.0.99.x | 99 | CT Caddy (proxy interno, nodo Hermes) | Planificado |
 
 > Añadir/actualizar esta tabla cuando se creen nuevos registros o cambien IPs/hostnames.
 
