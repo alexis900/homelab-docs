@@ -455,10 +455,10 @@ Registrar en [INC](../inc/) usando [template](../templates/INC.md):
 
 | RFC | Título | Fecha | Criticidad | Estado |
 |-----|--------|-------|-----------|--------|
-| RFC-2026-0005-INFRA | Despliegue y adopción de dos switches Omada SG205GP en VLAN de gestión | 2026-02-11 | Media | ✓ |
-| RFC-2026-0004-MON | Migración de Uptime Kuma a contenedor Docker | 2026-02-11 | Media | ✓ |
+| RFC-2026-0005-HW | Despliegue y adopción de dos switches Omada SG205GP en VLAN de gestión | 2026-02-11 | Media | ✓ |
+| RFC-2026-0004-APP | Migración de Uptime Kuma a contenedor Docker | 2026-02-11 | Media | ✓ |
 | RFC-2026-0003-NET | Migración de DHCP normal a Kea en OPNsense 25.7.11_9 | 2026-02-06 | Media | ✓ |
-| RFC-2026-0006-WIFI | Instalación y adopción de puntos de acceso UniFi U7 Lite | 2026-01-31 | Media | ✓ |
+| RFC-2026-0006-NET | Instalación y adopción de puntos de acceso UniFi U7 Lite | 2026-01-31 | Media | ✓ |
 | RFC-2026-0002-NET | Instalación de CT UniFi OS | 2026-01-28 | Media | ✓ |
 
 Consulta el histórico completo en `rfc/completadas/` para el resto de RFCs.
@@ -470,26 +470,26 @@ Consulta el histórico completo en `rfc/completadas/` para el resto de RFCs.
 | MTN-2026-0001-NET | Actualización Omada Controller 6.0.0.25 a 6.1.0.19 | 2026-01-29 | Media | ✓ |
 | MTN-2026-0002-NET | Actualización de OPNsense a 26.1 | 2026-01-30 | Media | ✓ |
 
-Consulta `mnt/completadas/` para lista completa y detalles.
+Consulta `mtn/completadas/` para lista completa y detalles.
 
 ## Cambios Recientes (Últimos 30 días)
 
-- **2026-02-11:** Migración de Uptime Kuma a contenedor Docker (RFC-2026-0004-MON)
-- **2026-02-11:** Despliegue de dos switches Omada SG205GP (RFC-2026-0005-INFRA)
+- **2026-02-11:** Migración de Uptime Kuma a contenedor Docker (RFC-2026-0004-APP)
+- **2026-02-11:** Despliegue de dos switches Omada SG205GP (RFC-2026-0005-HW)
 - **2026-02-07:** Actualización de OPNsense a 26.1 (MTN-2026-0002-NET)
 - **2026-02-06:** Migración de DHCP a Kea en OPNsense (RFC-2026-0003-NET)
-- **2026-01-31:** Instalación y adopción de APs UniFi U7 Lite (RFC-2026-0006-WIFI)
+- **2026-01-31:** Instalación y adopción de APs UniFi U7 Lite (RFC-2026-0006-NET)
 - **2026-01-29:** Actualización Omada Controller (MTN-2026-0001-NET)
 - **2026-01-28:** Instalación de UniFi OS (RFC-2026-0002-NET)
 
 ## Cambios Planificados / Pendientes
 
-- **(Prioridad media)** RFC-2025-0020-SRV (Propuesta, 2025-11-16): Instalación de servidor CUPS en VLAN de servidores y migración de impresora Epson M100 Ecotank.
+- **(Prioridad media)** RFC-2025-0020-APP (Propuesta, 2025-11-16): Instalación de servidor CUPS en VLAN de servidores y migración de impresora Epson M100 Ecotank.
 - **(Prioridad media)** MTN-2026-0003-NET (Planificado, 2026-02-07): Actualización de UniFi Network Application 10.0.162 → 10.1.83 en el controlador UniFi OS; incluye backup previo, actualización y validaciones de servicio.
-- **(Prioridad media)** RFC-2026-0007-WIFI (Propuesta, 2026-02-11): Migrar gestión de APs UniFi U7 Lite a VLAN 99. Gestión actual en VLAN 1 (10.0.1.250 / 10.0.1.252); pendiente reservar IPs en 10.0.99.x y ejecutar plan.
+- **(Prioridad media)** RFC-2026-0007-NET (Propuesta, 2026-02-11): Migrar gestión de APs UniFi U7 Lite a VLAN 99. Gestión actual en VLAN 1 (10.0.1.250 / 10.0.1.252); pendiente reservar IPs en 10.0.99.x y ejecutar plan.
 - **(Prioridad alta)** RFC-2026-0008-SEC (Propuesta, 2026-02-11): Endurecimiento de accesos admin (SSH clave + 2FA) y limitar gestión a VLAN 99; incluye ajustes de firewall y switches.
 - **(Prioridad media)** RFC-2026-0009-SEC (Propuesta, 2026-02-11): Caddy en CT por nodo Proxmox para front TLS de servicios internos en VLAN 99 (Zeus y Hermes), con CA interna/DNS-01 y sync opcional.
-- **(Prioridad baja)** RFC-2025-0015-INFRA (Propuesta, 2025-09-27): Instalación de dos enchufes Schuko y una toma RJ45 Cat6a en canaleta empotrada.
+- **(Prioridad baja)** RFC-2025-0015-HW (Propuesta, 2025-09-27): Instalación de dos enchufes Schuko y una toma RJ45 Cat6a en canaleta empotrada.
 
 
 ---
