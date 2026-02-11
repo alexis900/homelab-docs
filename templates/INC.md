@@ -11,69 +11,47 @@ autor: Alejandro Martín Pérez
 
 # INC — {{ titulo }}
 
-## Resumen del incidente
+## Resumen
 
-Qué ha ocurrido y qué servicios se han visto afectados.
+Qué ha ocurrido, estado actual (Resuelto/Mitigado/En curso) y servicios afectados.
 
----
+## Severidad e Impacto
 
-## Impacto
-
-- Servicios afectados
-- Duración
-- Usuarios (si aplica)
-
----
+- Severidad: Alta | Media | Baja | Crítica
+- Impacto: servicios/usuarios afectados y duración aproximada.
 
 ## Línea temporal
 
-- **HH:MM** — Detección
-- **HH:MM** — Acciones iniciales
-- **HH:MM** — Causa identificada
+- **HH:MM** — Detección (monitor/usuario)
+- **HH:MM** — Acción inicial
+- **HH:MM** — Causa identificada (si aplica)
 - **HH:MM** — Mitigación
 - **HH:MM** — Servicio restaurado
 
----
-
-## Detección
-
-Cómo se detectó el problema.
-
----
-
 ## Causa raíz
 
-Explicación técnica de la causa real.
-
----
+Explicación técnica; si pendiente, hipótesis y próximos pasos.
 
 ## Acciones realizadas
 
 1. Acción 1
 2. Acción 2
 
----
+## Verificación
 
-## Resolución
-
-Estado final tras resolver el incidente.
-
----
+- [ ] Servicio/endpoint responde
+- [ ] Logs sin errores relevantes
+- [ ] Métricas/monitores en verde
 
 ## Lecciones aprendidas
 
-Qué se puede mejorar para evitar recurrencias.
-
----
+- Mejora 1 (p.ej. hardening, capacity, alertas)
 
 ## Acciones posteriores
 
-- [ ] Crear RFC si procede
+- [ ] Crear RFC/MTN si procede
 - [ ] Actualizar documentación
-- [ ] Mejorar monitorización
-- [ ] Automatizar prevención
-
----
+- [ ] Ajustar monitorización/prevenir recurrencia
 
 ## Firma
 
