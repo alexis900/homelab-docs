@@ -158,7 +158,7 @@ La segmentación mediante VLANs es esencial para:
 | Acceso WAN | A través de gateway ISP |
 | Estado | Activo |
 
-**Nota reciente:** tras la actualización a OPNsense 26.1 (MNT-2026-0002-NET) el servicio DHCP normal corre sobre **Kea DHCP** en todas las VLANs. ISC DHCP legacy está desactivado y PXE aún no se ha configurado (pendiente de RFC específico).
+**Nota reciente:** tras la actualización a OPNsense 26.1 (MTN-2026-0002-NET) el servicio DHCP normal corre sobre **Kea DHCP** en todas las VLANs. ISC DHCP legacy está desactivado y PXE aún no se ha configurado (pendiente de RFC específico).
 
 ### Virtualización: Proxmox
 
@@ -397,6 +397,9 @@ Registrar en [MNT](mnt/) usando [template](templates/MNT.md):
 ### SOP disponibles
 
 - `SOPs/SOP-CT-Proxmox.md`: Despliegue/actualización de contenedores (LXC o Docker en CT) en Proxmox Hermes: backups, despliegue, validaciones, rollback y limpieza.
+- `SOPs/SOP-VLAN.md`: Alta/cambio de VLAN en OPNsense + switches (creación, reglas mínimas, validación y rollback).
+- `SOPs/SOP-TLS-Certs.md`: Gestión de certificados TLS en NPM y distribución a servicios internos.
+- `SOPs/SOP-Incident-Red.md`: Respuesta rápida a incidentes de red (triage, mitigación, restauración, documentación).
 
 ### Incidentes y Problemas
 
@@ -425,12 +428,12 @@ Registrar en [INC](inc/) usando [template](templates/INC.md):
 Consulta el histórico completo en `rfc/completadas/` para el resto de RFCs.
 Consulta [rfc/completadas](rfc/completadas/) para lista completa y detalles.
 
-### Mantenimientos Completados (MNT)
+### Mantenimientos Completados (MTN)
 
-| MNT | Título | Fecha | Criticidad | Estado |
+| MTN | Título | Fecha | Criticidad | Estado |
 |-----|--------|-------|-----------|--------|
-| MNT-2026-0001-NET | Actualización Omada Controller 6.0.0.25 a 6.1.0.19 | 2026-01-29 | Media | ✓ |
-| MNT-2026-0002-NET | Actualización de OPNsense a 26.1 | 2026-01-30 | Media | ✓ |
+| MTN-2026-0001-NET | Actualización Omada Controller 6.0.0.25 a 6.1.0.19 | 2026-01-29 | Media | ✓ |
+| MTN-2026-0002-NET | Actualización de OPNsense a 26.1 | 2026-01-30 | Media | ✓ |
 
 Consulta [mnt/completadas](mnt/completadas/) para lista completa y detalles.
 
@@ -438,7 +441,7 @@ Consulta [mnt/completadas](mnt/completadas/) para lista completa y detalles.
 
 - **2026-02-11:** Migración de Uptime Kuma a contenedor Docker (RFC-2026-0004-MON)
 - **2026-02-11:** Despliegue de dos switches Omada SG205GP (RFC-2026-0005-INFRA)
-- **2026-02-07:** Actualización de OPNsense a 26.1 (MNT-2026-0002-NET)
+- **2026-02-07:** Actualización de OPNsense a 26.1 (MTN-2026-0002-NET)
 - **2026-02-06:** Migración de DHCP a Kea en OPNsense (RFC-2026-0003-NET)
 - **2026-01-31:** Instalación y adopción de APs UniFi U7 Lite (RFC-2026-0006-WIFI)
 - **2026-01-29:** Actualización Omada Controller (MNT-2026-0001-NET)
@@ -447,7 +450,7 @@ Consulta [mnt/completadas](mnt/completadas/) para lista completa y detalles.
 ### Cambios Planificados / Pendientes
 
 - **(Prioridad media)** RFC-2025-0020-SRV (Propuesta, 2025-11-16): Instalación de servidor CUPS en VLAN de servidores y migración de impresora Epson M100 Ecotank.
-- **(Prioridad media)** MNT-2026-0003-NET (Planificado, 2026-02-07): Actualización de UniFi Network Application 10.0.162 → 10.1.83 en el controlador UniFi OS; incluye backup previo, actualización y validaciones de servicio.
+- **(Prioridad media)** MTN-2026-0003-NET (Planificado, 2026-02-07): Actualización de UniFi Network Application 10.0.162 → 10.1.83 en el controlador UniFi OS; incluye backup previo, actualización y validaciones de servicio.
 - **(Prioridad media)** RFC-2026-0007-WIFI (Propuesta, 2026-02-11): Migrar gestión de APs UniFi U7 Lite a VLAN 99. Gestión actual en VLAN 1 (10.0.1.250 / 10.0.1.252); pendiente reservar IPs en 10.0.99.x y ejecutar plan.
 - **(Prioridad alta)** RFC-2026-0008-SEC (Propuesta, 2026-02-11): Endurecimiento de accesos admin (SSH clave + 2FA) y limitar gestión a VLAN 99; incluye ajustes de firewall y switches.
 - **(Prioridad baja)** RFC-2025-0015-INFRA (Propuesta, 2025-09-27): Instalación de dos enchufes Schuko y una toma RJ45 Cat6a en canaleta empotrada.
