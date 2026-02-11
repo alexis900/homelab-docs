@@ -37,4 +37,5 @@ Consulta `mnt/completadas/` para lista completa y detalles.
 - **(Prioridad media)** MTN-2026-0003-NET (Planificado, 2026-02-07): Actualización de UniFi Network Application 10.0.162 → 10.1.83 en el controlador UniFi OS; incluye backup previo, actualización y validaciones de servicio.
 - **(Prioridad media)** RFC-2026-0007-WIFI (Propuesta, 2026-02-11): Migrar gestión de APs UniFi U7 Lite a VLAN 99. Gestión actual en VLAN 1 (10.0.1.250 / 10.0.1.252); pendiente reservar IPs en 10.0.99.x y ejecutar plan.
 - **(Prioridad alta)** RFC-2026-0008-SEC (Propuesta, 2026-02-11): Endurecimiento de accesos admin (SSH clave + 2FA) y limitar gestión a VLAN 99; incluye ajustes de firewall y switches.
+- **(Prioridad media)** RFC-2026-0009-SEC (Propuesta, 2026-02-11): Caddy en CT por nodo Proxmox para front TLS de servicios internos en VLAN 99 (Zeus y Hermes), con CA interna/DNS-01 y sync opcional.
 - **(Prioridad baja)** RFC-2025-0015-INFRA (Propuesta, 2025-09-27): Instalación de dos enchufes Schuko y una toma RJ45 Cat6a en canaleta empotrada.
