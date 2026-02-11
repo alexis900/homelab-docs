@@ -1,17 +1,54 @@
-# Homelab Documentation
+# Homelab Docs
 
-Este repositorio contiene la documentación de **cambios, mantenimiento e incidentes** de mi Homelab.  
-Está pensado para versionar con Git y mantener un histórico claro y profesional.
+Documentación versionada del homelab: cambios (RFC), mantenimientos (MTN), incidentes (INC) y estado de la red (Doc-Red).
 
 ---
 
-## Estructura del repositorio
+## Estructura
 
 ```text
 homelab-docs/
-├── templates/             # Plantillas RFC, MNT e INC
-├── rfc/
-│   ├── propuestas/        # RFC no completadas
-│   └── completadas/       # RFC ejecutadas
-├── mnt/                   # Mantenimientos
+├── Doc-Red.md             # Índice de la documentación de red (enlaza a secciones)
+├── Doc-Red/               # Secciones individuales (Arquitectura, VLANs, Seguridad, etc.)
+├── scripts/               # Utilidades locales (ej. build-doc-red.sh)
+├── templates/             # Plantillas RFC, MTN, INC
+├── rfc/                   # Requests for Change (propuestas/completadas)
+├── mtn/                   # Mantenimientos (planificados/completados)
 └── inc/                   # Incidentes
+```
+
+---
+
+## Flujos principales
+
+- **RFC** (`rfc/`): Proponer y ejecutar cambios mayores. Usar `templates/RFC.md`.
+- **MTN** (`mtn/`): Mantenimientos rutinarios. Usar `templates/MTN.md`.
+- **INC** (`inc/`): Incidentes y post-mortems. Usar `templates/INC.md`.
+- **Doc-Red** (`Doc-Red/`): Estado vivo de la red (VLANs, dispositivos, servicios, reglas). Editar secciones específicas para evitar un único fichero grande.
+
+### SOPs rápidos
+- [SOP-CT-Proxmox](SOPs/SOP-CT-Proxmox.md) — despliegue/actualización de contenedores en Hermes.
+- [SOP-VLAN](SOPs/SOP-VLAN.md) — alta/cambio de VLAN en OPNsense + switches.
+- [SOP-TLS-Certs](SOPs/SOP-TLS-Certs.md) — gestión de certificados TLS en NPM y servicios internos.
+- [SOP-Incident-Red](SOPs/SOP-Incident-Red.md) — respuesta rápida a incidentes de red.
+
+---
+
+## Generar documento completo de red
+
+Para obtener un único markdown combinado desde las secciones:
+
+```bash
+./scripts/build-doc-red.sh            # genera Doc-Red-full.md
+./scripts/build-doc-red.sh salida.md  # opcional, nombre personalizado
+```
+
+El script valida que existan todas las secciones y coloca separadores `---` entre ellas.
+
+---
+
+## Notas
+
+- Mantén sincronizado `Doc-Red.md` si se añaden nuevas secciones o SOPs.
+- Los SOP siguen viviendo en `SOPs/` y se referencian desde `Doc-Red/Procedimientos.md`.
+- Commits: agrupa cambios por tema (ej. “docs: actualizar VLANs y reglas”).

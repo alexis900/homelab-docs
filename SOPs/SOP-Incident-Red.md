@@ -18,7 +18,7 @@
 
 ## 3) Aislar causa
 
-- Cambios recientes: revisar últimos RFC/MNT ejecutados.
+- Cambios recientes: revisar últimos RFC/MTN ejecutados.
 - Separar capa: físico (cables/poe), capa2 (VLAN/tagging), capa3 (rutas/firewall), servicios (DNS/DHCP).
 - Revisar reglas recientes que puedan bloquear.
 
@@ -31,7 +31,7 @@
 
 ## 5) Restauración
 
-- Revertir cambio reciente (rollback del RFC/MNT o snapshot si aplica).
+- Revertir cambio reciente (rollback del RFC/MTN o snapshot si aplica).
 - Reiniciar servicio puntual (kea-dhcp, unbound/named, interfaces OPNsense) si no hay riesgo.
 
 ## 6) Verificación
@@ -42,4 +42,4 @@
 ## 7) Documentación
 
 - Abrir incidente en `inc/` con: descripción, timeline, acciones, causa raíz, resolución, lecciones.
-- Si hubo rollback, anotar en RFC/MNT afectado.
+- Si hubo rollback, anotar en RFC/MTN afectado.

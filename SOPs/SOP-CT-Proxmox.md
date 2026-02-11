@@ -39,8 +39,8 @@
 ## 6) Documentación
 
 - Registrar versión nueva (imagen/tag, hash) y fecha.
-- Actualizar inventario/Doc-Red si cambian IP, puertos, dependencia o monitorización.
-- Marcar/crear RFC o MNT según corresponda (cambio vs mantenimiento).
+- Actualizar inventario en `Doc-Red/Servicios.md` si cambian IP, puertos, dependencia o monitorización.
+- Marcar/crear RFC o MTN según corresponda (cambio vs mantenimiento).
 
 ## 7) Limpieza
 

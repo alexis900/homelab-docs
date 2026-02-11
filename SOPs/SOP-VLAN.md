@@ -38,8 +38,8 @@
 
 ## 6) Documentación
 
-- Actualizar tabla de VLANs y resumen de reglas en Doc-Red.md.
-- Registrar cambio en RFC correspondiente (o cerrar MNT si es mantenimiento menor).
+- Actualizar tabla de VLANs en `Doc-Red/VLANs.md` y resumen de reglas en `Doc-Red/Seguridad.md`.
+- Registrar cambio en RFC correspondiente (o cerrar MTN si es mantenimiento menor).
 
 ## 7) Rollback
 

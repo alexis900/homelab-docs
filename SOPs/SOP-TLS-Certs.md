@@ -35,4 +35,4 @@
 ## 6) Documentación
 
 - Registrar fecha de renovación, método (HTTP-01/DNS-01) y expiración nueva.
-- Actualizar Doc-Red si cambia el flujo (p.ej. se añade DNS-01 con API).
+- Actualizar `Doc-Red/Seguridad.md` si cambia el flujo (p.ej. se añade DNS-01 con API).

@@ -1,5 +1,5 @@
 ---
-mnt: MNT-YYYY-NNNN-TIPO
+mnt: MTN-YYYY-NNNN-TIPO
 titulo: Tarea de mantenimiento
 tipo: NET | SYS | APP | SEC | HW
 estado: Planificado | Ejecutado | Fallido
@@ -8,7 +8,7 @@ fecha: YYYY-MM-DD
 autor: Alejandro Martín Pérez
 ---
 
-# MNT — {{ titulo }}
+# MTN — {{ titulo }}
 
 ## Descripción
 
