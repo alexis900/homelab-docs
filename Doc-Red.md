@@ -31,6 +31,7 @@ Este índice reúne y enlaza toda la documentación técnica y operacional de la
 - Mantén este índice sincronizado si se añaden nuevas secciones o ficheros.
 - Las tablas de VLANs, inventario de servicios y reglas de firewall ahora viven en sus archivos dedicados (enlaces arriba).
 - Los SOP siguen en `SOPs/` y se referencian desde la sección de Procedimientos.
+- El workflow CI `doc-red-consistency` verifica que `Doc-Red-full.md` esté regenerado en cada push/PR.
 
 ---
 
