@@ -4,6 +4,7 @@
 
 | RFC | Título | Fecha | Criticidad | Estado |
 |-----|--------|-------|-----------|--------|
+| RFC-2026-0010-HW | Instalación física final de APs UniFi U7 Lite | 2026-02-11 | Media | ✓ |
 | RFC-2026-0005-HW | Despliegue y adopción de dos switches Omada SG205GP en VLAN de gestión | 2026-02-11 | Media | ✓ |
 | RFC-2026-0004-APP | Migración de Uptime Kuma a contenedor Docker | 2026-02-11 | Media | ✓ |
 | RFC-2026-0003-NET | Migración de DHCP normal a Kea en OPNsense 25.7.11_9 | 2026-02-06 | Media | ✓ |
@@ -25,6 +26,7 @@ Consulta `mtn/completadas/` para lista completa y detalles.
 
 - **2026-02-11:** Migración de Uptime Kuma a contenedor Docker (RFC-2026-0004-APP)
 - **2026-02-11:** Despliegue de dos switches Omada SG205GP (RFC-2026-0005-HW)
+- **2026-02-11:** Instalación física final de APs UniFi U7 Lite (RFC-2026-0010-HW)
 - **2026-02-07:** Actualización de OPNsense a 26.1 (MTN-2026-0002-NET)
 - **2026-02-06:** Migración de DHCP a Kea en OPNsense (RFC-2026-0003-NET)
 - **2026-01-31:** Instalación y adopción de APs UniFi U7 Lite (RFC-2026-0006-NET)
