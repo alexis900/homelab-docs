@@ -220,15 +220,32 @@ La red doméstica utiliza una arquitectura de **segmentación por VLANs** con un
 
 ### Entradas DNS internas (inventario)
 
-| Hostname | IP | VLAN | Descripción | Estado |
-|----------|----|------|-------------|--------|
-| uptime.home.arpa | 10.0.99.20 | 99 | Uptime Kuma (monitorización) | Activo |
+| Hostname | IP / CNAME | VLAN | Descripción | Estado |
+|----------|------------|------|-------------|--------|
+| docker-srv2.home.arpa | 10.0.1.10 | 1 | Host docker servicios LAN | Activo |
+| sonarr.home.arpa | CNAME docker-srv2 | 1 | Alias Sonarr en docker-srv2 | Activo |
+| radarr.home.arpa | CNAME docker-srv2 | 1 | Alias Radarr en docker-srv2 | Activo |
+| jelly.home.arpa | CNAME docker-srv2 | 1 | Alias Jellyfin en docker-srv2 | Activo |
+| photos.home.arpa | CNAME docker-srv2 | 1 | Alias fotos en docker-srv2 | Activo |
+| u7-salon.home.arpa | 10.0.1.250 | 1 | AP UniFi U7 Lite salón | Activo |
+| u7-ruter.home.arpa | 10.0.1.252 | 1 | AP UniFi U7 Lite router | Activo |
+| npm.home.arpa | 10.0.20.10 | 20 | Nginx Proxy Manager (DMZ) | Activo |
 | ns1.home.arpa (NS1) | 10.0.30.10 | 30 | Servidor DNS primario | Activo |
 | ns2.home.arpa (NS2) | 10.0.30.11 | 30 | Servidor DNS secundario | Activo |
+| mqtt.home.arpa | 10.0.30.12 | 30 | Broker MQTT (Zigbee/IoT) | Activo |
+| z2m.home.arpa | CNAME mqtt | 30 | Alias Zigbee2MQTT → MQTT | Activo |
+| hass.home.arpa | 10.0.30.14 | 30 | Home Assistant | Activo |
+| ha.home.arpa | CNAME hass | 30 | Alias HA | Activo |
+| pxe.home.arpa | 10.0.30.20 | 30 | Servidor PXE | Activo |
+| uptime.home.arpa | 10.0.99.20 | 99 | Uptime Kuma (monitorización) | Activo |
 | omada.home.arpa | 10.0.99.10 | 99 | Controlador Omada | Activo |
 | unifi.home.arpa | 10.0.99.12 | 99 | Controlador UniFi OS | Activo |
-| npm.home.arpa | 10.0.20.10 | 20 | Nginx Proxy Manager (DMZ) | Activo |
-| zigbee2mqtt.home.arpa | 10.0.30.13 | 30 | Puente Zigbee (Z2M) → MQTT | Activo |
+| zeus.home.arpa | 10.0.99.100 | 99 | Nodo Proxmox principal (Zeus) | Activo |
+| hermes.home.arpa | 10.0.99.102 | 99 | Nodo Proxmox Hermes | Activo |
+| pbs.home.arpa | 10.0.99.110 | 99 | Proxmox Backup Server | Activo |
+| core-sw01.home.arpa | 10.0.99.200 | 99 | Switch core TL-SG2008 | Activo |
+| em-sw01.home.arpa | 10.0.99.202 | 99 | Switch Omada SG205GP #1 | Activo |
+| em-sw02.home.arpa | 10.0.99.204 | 99 | Switch Omada SG205GP #2 | Activo |
 
 > Añadir/actualizar esta tabla cuando se creen nuevos registros o cambien IPs/hostnames.
 
