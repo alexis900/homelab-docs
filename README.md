@@ -47,6 +47,18 @@ El script valida que existan todas las secciones y coloca separadores `---` entr
 
 ---
 
+## Hook opcional (pre-commit)
+
+Para regenerar automáticamente `Doc-Red-full.md` cuando cambies cualquier archivo de `Doc-Red/` o `Doc-Red.md`:
+
+```bash
+ln -s ../../scripts/hooks/pre-commit-doc-red.sh .git/hooks/pre-commit
+```
+
+El hook reconstruye `Doc-Red-full.md` y lo vuelve a añadir al índice si cambió.
+
+---
+
 ## Notas
 
 - Mantén sincronizado `Doc-Red.md` si se añaden nuevas secciones o SOPs.

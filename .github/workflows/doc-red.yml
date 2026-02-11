@@ -1,0 +1,21 @@
+name: doc-red-consistency
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+
+jobs:
+  doc-red:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build combined Doc-Red
+        run: |
+          chmod +x scripts/build-doc-red.sh
+          ./scripts/build-doc-red.sh Doc-Red-full.md
+
+      - name: Verify Doc-Red-full.md is up to date
+        run: git diff --exit-code -- Doc-Red-full.md
