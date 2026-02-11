@@ -246,8 +246,6 @@ La red doméstica utiliza una arquitectura de **segmentación por VLANs** con un
 | core-sw01.home.arpa | 10.0.99.200 | 99 | Switch core TL-SG2008 | Activo |
 | em-sw01.home.arpa | 10.0.99.202 | 99 | Switch Omada SG205GP #1 | Activo |
 | em-sw02.home.arpa | 10.0.99.204 | 99 | Switch Omada SG205GP #2 | Activo |
-| caddy-zeus.home.arpa | 10.0.99.x | 99 | CT Caddy (proxy interno, nodo Zeus) | Planificado |
-| caddy-hermes.home.arpa | 10.0.99.x | 99 | CT Caddy (proxy interno, nodo Hermes) | Planificado |
 
 > Añadir/actualizar esta tabla cuando se creen nuevos registros o cambien IPs/hostnames.
 
@@ -492,7 +490,7 @@ Consulta `mtn/completadas/` para lista completa y detalles.
 - **(Prioridad media)** MTN-2026-0003-NET (Planificado, 2026-02-07): Actualización de UniFi Network Application 10.0.162 → 10.1.83 en el controlador UniFi OS; incluye backup previo, actualización y validaciones de servicio.
 - **(Prioridad media)** RFC-2026-0007-NET (Propuesta, 2026-02-11): Migrar gestión de APs UniFi U7 Lite a VLAN 99. Gestión actual en VLAN 1 (10.0.1.250 / 10.0.1.252); pendiente reservar IPs en 10.0.99.x y ejecutar plan.
 - **(Prioridad alta)** RFC-2026-0008-SEC (Propuesta, 2026-02-11): Endurecimiento de accesos admin (SSH clave + 2FA) y limitar gestión a VLAN 99; incluye ajustes de firewall y switches.
-- **(Prioridad media)** RFC-2026-0009-SEC (Propuesta, 2026-02-11): Caddy en CT por nodo Proxmox para front TLS de servicios internos en VLAN 99 (Zeus y Hermes), con CA interna/DNS-01 y sync opcional.
+- **(Prioridad media)** RFC-2026-0009-SEC (Propuesta, 2026-02-11): Caddy en CT por nodo Proxmox para front TLS de servicios internos en VLAN 99 (Zeus y Hermes), con CA interna/DNS-01 y sync opcional. *(En evaluación; aún no implantado).*
 - **(Prioridad baja)** RFC-2025-0015-HW (Propuesta, 2025-09-27): Instalación de dos enchufes Schuko y una toma RJ45 Cat6a en canaleta empotrada.
 
 
