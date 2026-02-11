@@ -1,7 +1,7 @@
 ---
 rfc: RFC-YYYY-NNNN-TIPO
 titulo: {{ titulo breve y claro }}
-tipo: NET | SYS | APP | SEC | HW | DOC | OTHER
+tipo: NET | SYS | APP | SEC | HW | IOT | DOC | OTHER
 estado: Propuesta | En curso | Completada | Cancelada
 criticidad: Baja | Media | Alta
 fecha: YYYY-MM-DD
