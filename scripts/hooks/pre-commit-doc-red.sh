@@ -8,8 +8,8 @@ changed=$(git diff --cached --name-only)
 
 needs_build=false
 while IFS= read -r path; do
-  case "$path" in
-    Doc-Red.md|Doc-Red/*)
+case "$path" in
+    Doc-Red/index.md|Doc-Red/*)
       needs_build=true
       break
       ;;

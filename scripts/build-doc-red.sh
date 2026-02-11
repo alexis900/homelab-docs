@@ -7,7 +7,7 @@ set -euo pipefail
 out_file="${1:-Doc-Red-full.md}"
 
 parts=(
-  "Doc-Red.md"
+  "Doc-Red/index.md"
   "Doc-Red/Arquitectura.md"
   "Doc-Red/VLANs.md"
   "Doc-Red/Dispositivos.md"

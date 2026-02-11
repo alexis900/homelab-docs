@@ -8,8 +8,7 @@ Documentación versionada del homelab: cambios (RFC), mantenimientos (MTN), inci
 
 ```text
 homelab-docs/
-├── Doc-Red.md             # Índice de la documentación de red (enlaza a secciones)
-├── Doc-Red/               # Secciones individuales (Arquitectura, VLANs, Seguridad, etc.)
+├── Doc-Red/               # Índice (index.md) y secciones (Arquitectura, VLANs, Seguridad, etc.)
 ├── scripts/               # Utilidades locales (ej. build-doc-red.sh)
 ├── templates/             # Plantillas RFC, MTN, INC
 ├── rfc/                   # Requests for Change (propuestas/completadas)
@@ -49,7 +48,7 @@ El script valida que existan todas las secciones y coloca separadores `---` entr
 
 ## Hook opcional (pre-commit)
 
-Para regenerar automáticamente `Doc-Red-full.md` cuando cambies cualquier archivo de `Doc-Red/` o `Doc-Red.md`:
+Para regenerar automáticamente `Doc-Red-full.md` cuando cambies cualquier archivo de `Doc-Red/` o `Doc-Red/index.md`:
 
 ```bash
 ln -s ../../scripts/hooks/pre-commit-doc-red.sh .git/hooks/pre-commit
@@ -61,6 +60,6 @@ El hook reconstruye `Doc-Red-full.md` y lo vuelve a añadir al índice si cambi�
 
 ## Notas
 
-- Mantén sincronizado `Doc-Red.md` si se añaden nuevas secciones o SOPs.
+- Mantén sincronizado `Doc-Red/index.md` si se añaden nuevas secciones o SOPs.
 - Los SOP siguen viviendo en `SOPs/` y se referencian desde `Doc-Red/Procedimientos.md`.
 - Commits: agrupa cambios por tema (ej. “docs: actualizar VLANs y reglas”).
