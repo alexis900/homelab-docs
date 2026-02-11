@@ -1,7 +1,7 @@
 ---
 rfc: RFC-2025-0008-SRVNET
 titulo: Instalación del controlador Omada en la VLAN 99 y adopción del switch core
-tipo: SRV / NET
+tipo: NET
 estado: Completada
 criticidad: Media
 fecha: 2025-08-01
