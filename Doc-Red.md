@@ -164,7 +164,7 @@ La segmentación mediante VLANs es esencial para:
 
 | Atributo | Valor |
 |----------|-------|
-| Nodo | Apollo |
+| Nodo | Hermes |
 | Función | Host para contenedores (CT) |
 | Sistema | Debian |
 | VLAN Gestión | VLAN 99 |
@@ -295,6 +295,7 @@ La segmentación mediante VLANs es esencial para:
 | WAN | DMZ | 80 | TCP | Permitir | HTTP redirección |
 | VLAN 1 | VLAN 99 | 22,443 | TCP | Permitir | Admin SSH/Web |
 | VLAN 1 | VLAN 30 | 53 | UDP,TCP | Permitir | DNS |
+| WAN | Firewall (self) | 51820 | UDP | Permitir | VPN WireGuard |
 
 #### Salida (Outbound)
 
@@ -305,12 +306,23 @@ La segmentación mediante VLANs es esencial para:
 | VLAN 40 | VLAN 1 | Todos | Todos | Bloquear | IoT aislado |
 | VLAN 100 | VLAN 30,1 | Selectivo | TCP | Permitir | VPN acceso controlado |
 
+#### Resumen de reglas activas (export OPNsense 11/02/2026)
+
+- **WAN → DMZ (NPM_DMZ):** TCP 80, 443 permitidos.
+- **WAN → Firewall (self):** UDP 51820 permitida (WireGuard).
+- **LAN → DNS_SERVERS:** UDP/TCP 53 y UDP 853 permitidos.
+- **LAN → salidas web básicas:** TCP 80, 443 permitidos; UDP 123 (NTP) permitido.
+- **LAN (ADMIN_PC) → servicios internos:** NPM_DMZ:81, Z2MQTT:8080, Home Assistant:8123, Proxmox:8006-8007, DNS/Z2MQTT SSH:22, Uptime Kuma:3001, Omada:8443, Zigbee Coordinator:80.
+- **LAN regla amplia:** allow any/any (entrada) presente al final de la cadena.
+- **OPT1 (VLAN secundaria):** DNS 53/853, NTP 123, HTTP/HTTPS permitidos; ICMP permitido; bloqueo catch-all TCP/UDP en 261.
+- **OPT2 (otra VLAN):** DNS 53 (TCP/UDP) hacia DNS_SERVERS, HTTP/HTTPS permitidos; flujos Z2MQTT↔ZBCOORD puerto 6638; ICMP permitido; allow any/any (351).
+- **OPT3 (otra VLAN):** DNS 53, NTP 123 permitidos; tráfico Zigbee coordinator ↔ Z2MQTT puerto 6638 permitido.
 ### Acceso Administrativo
 
-- **VLAN 99:** Única red para administración
-- **Dispositivos críticos:** Acceso SSH key-based + 2FA (cuando aplique)
-- **Switch management:** Solo desde VLAN 99
-- **Firewall:** Acceso solo desde VLAN 99/LAN
+- **Estado actual:** Acceso de administración permitido desde VLAN 1 y VLAN 99 (sin 2FA aplicado aún).
+- **SSH:** Claves recomendadas; verificar y aplicar en dispositivos pendientes.
+- **Switch management:** Acceso desde VLAN 99 previsto; consolidar y bloquear desde otras VLANs.
+- **Firewall:** Revisar y limitar a VLAN 99/LAN según plan de hardening.
 
 ---
 
@@ -382,6 +394,10 @@ Registrar en [MNT](mnt/) usando [template](templates/MNT.md):
 - Rotación de logs
 - Tests de backup
 
+### SOP disponibles
+
+- `SOPs/SOP-CT-Proxmox.md`: Despliegue/actualización de contenedores (LXC o Docker en CT) en Proxmox Hermes: backups, despliegue, validaciones, rollback y limpieza.
+
 ### Incidentes y Problemas
 
 Registrar en [INC](inc/) usando [template](templates/INC.md):
@@ -396,19 +412,17 @@ Registrar en [INC](inc/) usando [template](templates/INC.md):
 
 ## Historial de Cambios
 
-### RFCs Completadas (Muestra)
+### RFCs Completadas (últimos 30 días)
 
 | RFC | Título | Fecha | Criticidad | Estado |
 |-----|--------|-------|-----------|--------|
-| RFC-2026-0005-INFRA | Despliegue de dos switches Omada SG205GP | 2026-02-11 | Media | ✓ |
+| RFC-2026-0005-INFRA | Despliegue y adopción de dos switches Omada SG205GP en VLAN de gestión | 2026-02-11 | Media | ✓ |
 | RFC-2026-0004-MON | Migración de Uptime Kuma a contenedor Docker | 2026-02-11 | Media | ✓ |
 | RFC-2026-0003-NET | Migración de DHCP normal a Kea en OPNsense 25.7.11_9 | 2026-02-06 | Media | ✓ |
-| RFC-2026-0006-WIFI | Instalación y adopción de APs UniFi U7 Lite | 2026-01-31 | Media | ✓ |
-| RFC-2026-0002-NET | Instalación CT UniFi OS | 2026-01-28 | Media | ✓ |
-| RFC-2025-0012-NET | Gestión switch a VLAN 99 | 2025-08-08 | Media | ✓ |
-| RFC-2025-0006-NET | Creación DMZ (VLAN 20) | 2025-07-30 | Media | ✓ |
-| RFC-2025-0001-NET | Migración de Apollo a VLAN 99 | 2025-07-16 | Alta | ✓ |
+| RFC-2026-0006-WIFI | Instalación y adopción de puntos de acceso UniFi U7 Lite | 2026-01-31 | Media | ✓ |
+| RFC-2026-0002-NET | Instalación de CT UniFi OS | 2026-01-28 | Media | ✓ |
 
+Consulta el histórico completo en `rfc/completadas/` para el resto de RFCs.
 Consulta [rfc/completadas](rfc/completadas/) para lista completa y detalles.
 
 ### Mantenimientos Completados (MNT)
@@ -435,6 +449,7 @@ Consulta [mnt/completadas](mnt/completadas/) para lista completa y detalles.
 - **(Prioridad media)** RFC-2025-0020-SRV (Propuesta, 2025-11-16): Instalación de servidor CUPS en VLAN de servidores y migración de impresora Epson M100 Ecotank.
 - **(Prioridad media)** MNT-2026-0003-NET (Planificado, 2026-02-07): Actualización de UniFi Network Application 10.0.162 → 10.1.83 en el controlador UniFi OS; incluye backup previo, actualización y validaciones de servicio.
 - **(Prioridad media)** RFC-2026-0007-WIFI (Propuesta, 2026-02-11): Migrar gestión de APs UniFi U7 Lite a VLAN 99. Gestión actual en VLAN 1 (10.0.1.250 / 10.0.1.252); pendiente reservar IPs en 10.0.99.x y ejecutar plan.
+- **(Prioridad alta)** RFC-2026-0008-SEC (Propuesta, 2026-02-11): Endurecimiento de accesos admin (SSH clave + 2FA) y limitar gestión a VLAN 99; incluye ajustes de firewall y switches.
 - **(Prioridad baja)** RFC-2025-0015-INFRA (Propuesta, 2025-09-27): Instalación de dos enchufes Schuko y una toma RJ45 Cat6a en canaleta empotrada.
 
 ---
