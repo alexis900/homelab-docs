@@ -92,7 +92,7 @@
 - **APs desplegados (U7 Lite, 31/01/2026):**
   - AP-1 — VLAN 1 (LAN), IP 10.0.1.250
   - AP-2 — VLAN 1 (LAN), IP 10.0.1.252
-  - **Pendiente:** Migrar gestión de APs a VLAN 99 (RFC-2026-0007-WIFI)
+  - **Pendiente:** Migrar gestión de APs a VLAN 99 (RFC-2026-0007-NET)
 
 ### SSIDs
 

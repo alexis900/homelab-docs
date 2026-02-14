@@ -26,6 +26,7 @@ homelab-docs/
 - **Doc-Red** (`Doc-Red/`): Estado vivo de la red (VLANs, dispositivos, servicios, reglas). Editar secciones específicas para evitar un único fichero grande.
 
 ### SOPs rápidos
+
 - [SOP-CT-Proxmox](SOPs/SOP-CT-Proxmox.md) — despliegue/actualización de contenedores en Hermes.
 - [SOP-VLAN](SOPs/SOP-VLAN.md) — alta/cambio de VLAN en OPNsense + switches.
 - [SOP-TLS-Certs](SOPs/SOP-TLS-Certs.md) — gestión de certificados TLS en NPM y servicios internos.
