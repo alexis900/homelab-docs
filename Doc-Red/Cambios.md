@@ -21,11 +21,17 @@ Consulta el histórico completo en `rfc/completadas/` para el resto de RFCs.
 |-----|--------|-------|-----------|--------|
 | MTN-2026-0001-NET | Actualización Omada Controller 6.0.0.25 a 6.1.0.19 | 2026-01-29 | Media | ✓ |
 | MTN-2026-0002-NET | Actualización de OPNsense a 26.1 | 2026-01-30 | Media | ✓ |
+| MTN-2026-0004-NET | Actualización del firewall OPNsense de la versión 26.1 a 26.1.1 | 2026-02-14 | Baja | ✓ |
+| MTN-2026-0005-SYS | Actualización del nodo Zeus de la versión 9.1.4 a 9.1.5 | 2026-02-14 | Baja | ✓ |
+| MTN-2026-0006-SYS | Actualizacion del nodo Hermes de la version 9.1.4 a 9.1.5 | 2026-02-14 | Baja | ✓ |
 
 Consulta `mtn/completadas/` para lista completa y detalles.
 
 ## Cambios Recientes (Últimos 30 días)
 
+- **2026-02-14:** Actualización del nodo Zeus a 9.1.5 (MTN-2026-0005-SYS).
+- **2026-02-14:** Actualización del nodo Hermes a 9.1.5 (MTN-2026-0006-SYS).
+- **2026-02-14:** Actualización de OPNsense a 26.1.1 (MTN-2026-0004-NET).
 - **2026-02-14:** Servicio PXE recuperado y validado en UEFI; BIOS fuera de alcance por decision operativa (cierre de RFC-2026-0012-NET).
 - **2026-02-12:** Servicio PXE en estado degradado tras desactivar ISC DHCP; abierta RFC-2026-0012-NET para migracion a Kea/ProxyDHCP.
 - **2026-02-12:** Documentación del servidor PXE (RFC-2026-0011-DOC)
