@@ -4,6 +4,8 @@
 
 | RFC | Título | Fecha | Criticidad | Estado |
 |-----|--------|-------|-----------|--------|
+| RFC-2026-0012-NET | Recuperación de PXE tras desactivar ISC DHCP en OPNsense | 2026-02-14 | Alta | ✓ |
+| RFC-2026-0011-DOC | Documentación del servidor PXE | 2026-02-12 | Baja | ✓ |
 | RFC-2026-0010-HW | Instalación física final de APs UniFi U7 Lite | 2026-02-11 | Media | ✓ |
 | RFC-2026-0005-HW | Despliegue y adopción de dos switches Omada SG205GP en VLAN de gestión | 2026-02-11 | Media | ✓ |
 | RFC-2026-0004-APP | Migración de Uptime Kuma a contenedor Docker | 2026-02-11 | Media | ✓ |
@@ -24,6 +26,9 @@ Consulta `mtn/completadas/` para lista completa y detalles.
 
 ## Cambios Recientes (Últimos 30 días)
 
+- **2026-02-14:** Servicio PXE recuperado y validado en UEFI; BIOS fuera de alcance por decision operativa (cierre de RFC-2026-0012-NET).
+- **2026-02-12:** Servicio PXE en estado degradado tras desactivar ISC DHCP; abierta RFC-2026-0012-NET para migracion a Kea/ProxyDHCP.
+- **2026-02-12:** Documentación del servidor PXE (RFC-2026-0011-DOC)
 - **2026-02-11:** Migración de Uptime Kuma a contenedor Docker (RFC-2026-0004-APP)
 - **2026-02-11:** Despliegue de dos switches Omada SG205GP (RFC-2026-0005-HW)
 - **2026-02-11:** Instalación física final de APs UniFi U7 Lite (RFC-2026-0010-HW)

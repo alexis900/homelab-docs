@@ -24,7 +24,7 @@
 | Acceso WAN | A través de gateway ISP |
 | Estado | Activo |
 
-**Nota reciente:** tras la actualización a OPNsense 26.1 (MTN-2026-0002-NET) el servicio DHCP normal corre sobre **Kea DHCP** en todas las VLANs. ISC DHCP legacy está desactivado y PXE aún no se ha configurado (pendiente de RFC específico).
+**Nota reciente (2026-02-14):** tras la actualización a OPNsense 26.1 (MTN-2026-0002-NET), el DHCP normal corre sobre **Kea DHCP**. El incidente de PXE provocado al desactivar ISC DHCP quedo corregido y documentado en `rfc/completadas/RFC-2026-0012-NET.md`.
 
 ## Virtualización: Proxmox
 

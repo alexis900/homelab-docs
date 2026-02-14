@@ -11,6 +11,7 @@
 | Uptime Kuma | Proxmox (Docker en CT) | 99 | 10.0.99.20 | Monitorización de servicios (uptime.home.arpa) | 🟢 |
 | NPM | Proxmox | 20 | 10.0.20.10 | Nginx Proxy Manager (DMZ) | 🟢 |
 | Zigbee2MQTT | Proxmox | 30 | 10.0.30.13 | Puente Zigbee → MQTT | 🟢 |
+| PXE | Proxmox | 30 | 10.0.30.20 | Arranque por red | 🟢 |
 
 ## Servicios DNS
 
@@ -61,6 +62,13 @@
 | caddy-hermes.home.arpa | 10.0.99.x | 99 | CT Caddy (proxy interno, nodo Hermes) | Planificado |
 
 > Añadir/actualizar esta tabla cuando se creen nuevos registros o cambien IPs/hostnames.
+
+## Servidor PXE
+
+- **FQDN:** `pxe.home.arpa` (10.0.30.20)
+- **VLAN:** 30
+- **Rol:** entrega de arranque por red para despliegues o rescates de hardware; documentado formalmente en `rfc/completadas/RFC-2026-0011-DOC.md`.
+- **Estado actual (2026-02-14):** Operativo solo para UEFI. El arranque PXE quedo recuperado para UEFI tras completar la correccion documentada en `rfc/completadas/RFC-2026-0012-NET.md`; BIOS queda fuera de alcance por decision operativa.
 
 ## Gestión Omada
 
