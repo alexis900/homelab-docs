@@ -495,7 +495,8 @@ Consulta el histórico completo en `rfc/completadas/` para el resto de RFCs.
 | MTN-2026-0002-NET | Actualización de OPNsense a 26.1 | 2026-01-30 | Media | ✓ |
 | MTN-2026-0004-NET | Actualización del firewall OPNsense de la versión 26.1 a 26.1.1 | 2026-02-14 | Baja | ✓ |
 | MTN-2026-0005-SYS | Actualización del nodo Zeus de la versión 9.1.4 a 9.1.5 | 2026-02-14 | Baja | ✓ |
-| MTN-2026-0006-SYS | Actualizacion del nodo Hermes de la version 9.1.4 a 9.1.5 | 2026-02-14 | Baja | ✓ |
+| MTN-2026-0006-SYS | Actualización del nodo Hermes de la versión 9.1.4 a 9.1.5 | 2026-02-14 | Baja | ✓ |
+| MTN-2026-0003-NET | Actualización UniFi Network Application 10.0.162 → 10.1.85 | 2026-02-14 | Media | ✓ |
 
 Consulta `mtn/completadas/` para lista completa y detalles.
 
@@ -504,6 +505,7 @@ Consulta `mtn/completadas/` para lista completa y detalles.
 - **2026-02-14:** Actualización del nodo Zeus a 9.1.5 (MTN-2026-0005-SYS).
 - **2026-02-14:** Actualización del nodo Hermes a 9.1.5 (MTN-2026-0006-SYS).
 - **2026-02-14:** Actualización de OPNsense a 26.1.1 (MTN-2026-0004-NET).
+- **2026-02-14:** Actualización UniFi Network Application a 10.1.85 (MTN-2026-0003-NET).
 - **2026-02-14:** Servicio PXE recuperado y validado en UEFI; BIOS fuera de alcance por decision operativa (cierre de RFC-2026-0012-NET).
 - **2026-02-12:** Servicio PXE en estado degradado tras desactivar ISC DHCP; abierta RFC-2026-0012-NET para migracion a Kea/ProxyDHCP.
 - **2026-02-12:** Documentación del servidor PXE (RFC-2026-0011-DOC)
@@ -519,7 +521,7 @@ Consulta `mtn/completadas/` para lista completa y detalles.
 ## Cambios Planificados / Pendientes
 
 - **(Prioridad media)** RFC-2025-0020-APP (Propuesta, 2025-11-16): Instalación de servidor CUPS en VLAN de servidores y migración de impresora Epson M100 Ecotank.
-- **(Prioridad media)** MTN-2026-0003-NET (Planificado, 2026-02-07): Actualización de UniFi Network Application 10.0.162 → 10.1.83 en el controlador UniFi OS; incluye backup previo, actualización y validaciones de servicio.
+- **(Prioridad media)** RFC-2026-0013-APP (Propuesta, 2026-02-14): Migración de UniFi Network Server a UniFi OS Server (autoalojado).
 - **(Prioridad media)** RFC-2026-0007-NET (Propuesta, 2026-02-11): Migrar gestión de APs UniFi U7 Lite a VLAN 99. Gestión actual en VLAN 1 (10.0.1.250 / 10.0.1.252); pendiente reservar IPs en 10.0.99.x y ejecutar plan.
 - **(Prioridad alta)** RFC-2026-0008-SEC (Propuesta, 2026-02-11): Endurecimiento de accesos admin (SSH clave + 2FA) y limitar gestión a VLAN 99; incluye ajustes de firewall y switches.
 - **(Prioridad media)** RFC-2026-0009-SEC (Propuesta, 2026-02-11): Caddy en CT por nodo Proxmox para front TLS de servicios internos en VLAN 99 (Zeus y Hermes), con CA interna/DNS-01 y sync opcional.
