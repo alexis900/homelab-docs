@@ -39,8 +39,8 @@ homelab-docs/
 Para obtener un único markdown combinado desde las secciones:
 
 ```bash
-./scripts/build-doc-red.sh            # genera Doc-Red-full.md
-./scripts/build-doc-red.sh salida.md  # opcional, nombre personalizado
+./scripts/build-doc-red.sh                          # genera Doc-Red/Doc-Red-full.md
+./scripts/build-doc-red.sh Doc-Red/Doc-Red-full.md  # opcional, nombre personalizado
 ```
 
 El script valida que existan todas las secciones y coloca separadores `---` entre ellas.
@@ -49,13 +49,13 @@ El script valida que existan todas las secciones y coloca separadores `---` entr
 
 ## Hook opcional (pre-commit)
 
-Para regenerar automáticamente `Doc-Red-full.md` cuando cambies cualquier archivo de `Doc-Red/` o `Doc-Red/index.md`:
+Para regenerar automáticamente `Doc-Red/Doc-Red-full.md` cuando cambies cualquier archivo de `Doc-Red/` o `Doc-Red/index.md`:
 
 ```bash
 ln -s ../../scripts/hooks/pre-commit-doc-red.sh .git/hooks/pre-commit
 ```
 
-El hook reconstruye `Doc-Red-full.md` y lo vuelve a añadir al índice si cambió.
+El hook reconstruye `Doc-Red/Doc-Red-full.md` y lo vuelve a añadir al índice si cambió.
 
 ---
 

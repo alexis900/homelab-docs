@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Regenera Doc-Red-full.md si se modifica alguna sección de Doc-Red
+# Regenera Doc-Red/Doc-Red-full.md si se modifica alguna sección de Doc-Red
 # Úsalo como hook: ln -s ../../scripts/hooks/pre-commit-doc-red.sh .git/hooks/pre-commit
 
 set -euo pipefail
@@ -17,7 +17,7 @@ case "$path" in
 done <<< "$changed"
 
 if [[ "$needs_build" == "true" ]]; then
-  echo "[hook] Regenerando Doc-Red-full.md..."
+  echo "[hook] Regenerando Doc-Red/Doc-Red-full.md..."
   ./scripts/build-doc-red.sh
-  git add Doc-Red-full.md
+  git add Doc-Red/Doc-Red-full.md
 fi

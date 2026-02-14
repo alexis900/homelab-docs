@@ -13,16 +13,16 @@ Este índice reúne y enlaza toda la documentación técnica y operacional de la
 
 ## Estructura de Documentos
 
-- [Arquitectura General](Doc-Red/Arquitectura.md)
-- [Segmentación de VLANs](Doc-Red/VLANs.md)
-- [Dispositivos de Infraestructura](Doc-Red/Dispositivos.md)
-- [Servicios y Contenedores](Doc-Red/Servicios.md)
-- [Seguridad y Firewall](Doc-Red/Seguridad.md)
-- [Monitorización y Alertas](Doc-Red/Monitorizacion.md)
-- [Backup y Recuperación](Doc-Red/Backup.md)
-- [Procedimientos (SOP) e Incidentes](Doc-Red/Procedimientos.md)
-- [Historial de Cambios](Doc-Red/Cambios.md)
-- [Contacto y Referencias](Doc-Red/Contacto.md)
+- [Arquitectura General](Arquitectura.md)
+- [Segmentación de VLANs](VLANs.md)
+- [Dispositivos de Infraestructura](Dispositivos.md)
+- [Servicios y Contenedores](Servicios.md)
+- [Seguridad y Firewall](Seguridad.md)
+- [Monitorización y Alertas](Monitorizacion.md)
+- [Backup y Recuperación](Backup.md)
+- [Procedimientos (SOP) e Incidentes](Procedimientos.md)
+- [Historial de Cambios](Cambios.md)
+- [Contacto y Referencias](Contacto.md)
 
 ---
 
@@ -31,7 +31,7 @@ Este índice reúne y enlaza toda la documentación técnica y operacional de la
 - Mantén este índice sincronizado si se añaden nuevas secciones o ficheros.
 - Las tablas de VLANs, inventario de servicios y reglas de firewall ahora viven en sus archivos dedicados (enlaces arriba).
 - Los SOP siguen en `SOPs/` y se referencian desde la sección de Procedimientos.
-- El workflow CI `doc-red-consistency` verifica que `Doc-Red-full.md` esté regenerado en cada push/PR.
+- El workflow CI `doc-red-consistency` verifica que `Doc-Red/Doc-Red-full.md` esté regenerado en cada push/PR.
 
 ---
 

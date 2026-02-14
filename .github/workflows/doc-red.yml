@@ -15,7 +15,7 @@ jobs:
       - name: Build combined Doc-Red
         run: |
           chmod +x scripts/build-doc-red.sh
-          ./scripts/build-doc-red.sh Doc-Red-full.md
+          ./scripts/build-doc-red.sh Doc-Red/Doc-Red-full.md
 
-      - name: Verify Doc-Red-full.md is up to date
-        run: git diff --exit-code -- Doc-Red-full.md
+      - name: Verify Doc-Red/Doc-Red-full.md is up to date
+        run: git diff --exit-code -- Doc-Red/Doc-Red-full.md

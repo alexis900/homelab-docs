@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-out_file="${1:-Doc-Red-full.md}"
+out_file="${1:-Doc-Red/Doc-Red-full.md}"
 
 parts=(
   "Doc-Red/index.md"
@@ -19,6 +19,11 @@ parts=(
   "Doc-Red/Cambios.md"
   "Doc-Red/Contacto.md"
 )
+
+out_dir="$(dirname "$out_file")"
+if [[ "$out_dir" != "." ]]; then
+  mkdir -p "$out_dir"
+fi
 
 > "$out_file"
 
