@@ -25,6 +25,10 @@ Registrar en [MTN](../mtn/) usando [template](../templates/MTN.md):
 - [SOP-VLAN](../SOPs/SOP-VLAN.md): Alta/cambio de VLAN en OPNsense + switches (creación, reglas mínimas, validación y rollback).
 - [SOP-TLS-Certs](../SOPs/SOP-TLS-Certs.md): Gestión de certificados TLS en NPM y distribución a servicios internos.
 - [SOP-Incident-Red](../SOPs/SOP-Incident-Red.md): Respuesta rápida a incidentes de red (triage, mitigación, restauración, documentación).
+- [SOP-Zigbee-Devices](../SOPs/SOP-Zigbee-Devices.md): Alta/baja de dispositivos Zigbee (pairing, naming, IEEE, validación y rollback).
+- [SOP-HA-Automations](../SOPs/SOP-HA-Automations.md): Creación y mantenimiento de automatizaciones en Home Assistant con pruebas y rollback.
+- [SOP-DNS-Changes](../SOPs/SOP-DNS-Changes.md): Cambios de DNS interno en BIND9 con validación y rollback.
+- [SOP-Monitoring-Alerts](../SOPs/SOP-Monitoring-Alerts.md): Alta de monitores y alertas en Uptime Kuma con pruebas de notificación.
 
 ## Incidentes y Problemas
 

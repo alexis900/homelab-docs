@@ -325,9 +325,29 @@ La red doméstica utiliza una arquitectura de **segmentación por VLANs** con un
 - **Broker:** MQTT interno
 - **Dispositivos:** Sensores, controles Zigbee
 
-### Dispositivos Zigbee (IEEE)
+### Dispositivos Zigbee (Inventario)
 
-- Sonoff ZBMINIR2 (luz exterior) — `0x70c59cfffe493dce`
+| Nombre propuesto | IEEE | Modelo | Marca | Ubicación |
+|---|---|---|---|---|
+| termohigro_desconocido_1 | 0xa4c1382757848383 | LYWSD03MMC-z | Xiaomi | Pendiente |
+| techo_1a_planta_led1 | 0x44e2f8fffe36d25d | LED2104R3 | IKEA | 1a planta |
+| techo_2a_planta_led1 | 0x44e2f8fffe3a2a96 | LED2104R3 | IKEA | 2a planta |
+| techo_comedor_led1 | 0x90ab96fffe9b9862 | LED2005R5/LED2106R3 | IKEA | Comedor |
+| techo_1a_planta_led2 | 0x8c65a3fffee8ba1d | LED2104R3 | IKEA | 1a planta |
+| techo_2a_planta_led2 | 0x44e2f8fffe18e570 | LED2104R3 | IKEA | 2a planta |
+| techo_comedor_led2 | 0x980c33fffec21db6 | LED2005R5/LED2106R3 | IKEA | Comedor |
+| techo_comedor_led3 | 0x90ab96fffea4af3a | LED2005R5/LED2106R3 | IKEA | Comedor |
+| cocina_leds_tira | 0x28dba7fffeec22e5 | ICPSHC24-30EU-IL-1/ICPSHC24-10EU-IL-2 | IKEA | Cocina |
+| luz_exterior_rele | 0x70c59cfffe493dce | ZBMINIR2 | Sonoff | Exterior |
+| oficina_alejandro_bombilla_1 | 0x8c65a3fffedfb89b | LED2104R3 | IKEA | Oficina Alejandro |
+| oficina_alejandro_bombilla_2 | 0x44e2f8fffe3a2f5f | LED2104R3 | IKEA | Oficina Alejandro |
+| oficina_alejandro_bombilla_3 | 0x8c65a3fffee4a49c | LED2104R3 | IKEA | Oficina Alejandro |
+| cocina_movimiento | 0x881a14fffee850b5 | E2134 | IKEA | Cocina |
+| cocina_termohigro | 0xa4c138fbd78e4d8b | LYWSD03MMC-z | Xiaomi | Cocina |
+| comedor_termohigro | 0xa4c13859a3e356ab | LYWSD03MMC-z | Xiaomi | Comedor |
+| dormitorio_termohigro | 0xa4c138ae9a024402 | LYWSD03MMC-z | Xiaomi | Dormitorio |
+| oficina_alejandro_termohigro | 0xa4c138e913e72473 | LYWSD03MMC-z | Xiaomi | Oficina Alejandro |
+| zigbee_router_1 | 0xb43522fffe1e5c62 | Router | N/A | N/A |
 
 
 ---
@@ -460,6 +480,10 @@ Registrar en [MTN](../mtn/) usando [template](../templates/MTN.md):
 - [SOP-VLAN](../SOPs/SOP-VLAN.md): Alta/cambio de VLAN en OPNsense + switches (creación, reglas mínimas, validación y rollback).
 - [SOP-TLS-Certs](../SOPs/SOP-TLS-Certs.md): Gestión de certificados TLS en NPM y distribución a servicios internos.
 - [SOP-Incident-Red](../SOPs/SOP-Incident-Red.md): Respuesta rápida a incidentes de red (triage, mitigación, restauración, documentación).
+- [SOP-Zigbee-Devices](../SOPs/SOP-Zigbee-Devices.md): Alta/baja de dispositivos Zigbee (pairing, naming, IEEE, validación y rollback).
+- [SOP-HA-Automations](../SOPs/SOP-HA-Automations.md): Creación y mantenimiento de automatizaciones en Home Assistant con pruebas y rollback.
+- [SOP-DNS-Changes](../SOPs/SOP-DNS-Changes.md): Cambios de DNS interno en BIND9 con validación y rollback.
+- [SOP-Monitoring-Alerts](../SOPs/SOP-Monitoring-Alerts.md): Alta de monitores y alertas en Uptime Kuma con pruebas de notificación.
 
 ## Incidentes y Problemas
 
