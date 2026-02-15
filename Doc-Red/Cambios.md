@@ -20,6 +20,7 @@ Consulta el histórico completo en `rfc/completadas/` para el resto de RFCs.
 
 | MTN | Título | Fecha | Criticidad | Estado |
 |-----|--------|-------|-----------|--------|
+| MTN-2026-0007-HW | Actualización de firmware del relé Zigbee luz_exterior_rele | 2026-02-15 | Baja | ✓ |
 | MTN-2026-0001-NET | Actualización Omada Controller 6.0.0.25 a 6.1.0.19 | 2026-01-29 | Media | ✓ |
 | MTN-2026-0002-NET | Actualización de OPNsense a 26.1 | 2026-01-30 | Media | ✓ |
 | MTN-2026-0004-NET | Actualización del firewall OPNsense de la versión 26.1 a 26.1.1 | 2026-02-14 | Baja | ✓ |
@@ -31,6 +32,7 @@ Consulta `mtn/completadas/` para lista completa y detalles.
 
 ## Cambios Recientes (Últimos 30 días)
 
+- **2026-02-15:** Actualización firmware relé Zigbee `luz_exterior_rele` (MTN-2026-0007-HW).
 - **2026-02-15:** Instalación relé Sonoff ZBMINIR2 para luz exterior (RFC-2026-0015-IOT, en progreso).
 - **2026-02-15:** Instalacion de lampara IKEA NYMÅNE + 3 bombillas Zigbee en Oficina Alejandro (RFC-2026-0014-IOT).
 - **2026-02-14:** Actualización del nodo Zeus a 9.1.5 (MTN-2026-0005-SYS).
