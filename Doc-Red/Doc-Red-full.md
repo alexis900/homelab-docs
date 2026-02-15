@@ -325,6 +325,10 @@ La red doméstica utiliza una arquitectura de **segmentación por VLANs** con un
 - **Broker:** MQTT interno
 - **Dispositivos:** Sensores, controles Zigbee
 
+### Dispositivos Zigbee (IEEE)
+
+- Sonoff ZBMINIR2 (luz exterior) — `0x70c59cfffe493dce`
+
 
 ---
 
