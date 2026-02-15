@@ -124,3 +124,7 @@
 - **Función:** Integración de dispositivos Zigbee vía MQTT
 - **Broker:** MQTT interno
 - **Dispositivos:** Sensores, controles Zigbee
+
+### Dispositivos Zigbee (IEEE)
+
+- Sonoff ZBMINIR2 (luz exterior) — `0x70c59cfffe493dce`
