@@ -4,6 +4,7 @@
 
 | RFC | Título | Fecha | Criticidad | Estado |
 |-----|--------|-------|-----------|--------|
+| RFC-2026-0014-IOT | Instalacion de lampara IKEA NYMÅNE + 3 bombillas Zigbee en Oficina Alejandro | 2026-02-15 | Baja | ✓ |
 | RFC-2026-0012-NET | Recuperación de PXE tras desactivar ISC DHCP en OPNsense | 2026-02-14 | Alta | ✓ |
 | RFC-2026-0011-DOC | Documentación del servidor PXE | 2026-02-12 | Baja | ✓ |
 | RFC-2026-0010-HW | Instalación física final de APs UniFi U7 Lite | 2026-02-11 | Media | ✓ |
@@ -30,6 +31,7 @@ Consulta `mtn/completadas/` para lista completa y detalles.
 
 ## Cambios Recientes (Últimos 30 días)
 
+- **2026-02-15:** Instalacion de lampara IKEA NYMÅNE + 3 bombillas Zigbee en Oficina Alejandro (RFC-2026-0014-IOT).
 - **2026-02-14:** Actualización del nodo Zeus a 9.1.5 (MTN-2026-0005-SYS).
 - **2026-02-14:** Actualización del nodo Hermes a 9.1.5 (MTN-2026-0006-SYS).
 - **2026-02-14:** Actualización de OPNsense a 26.1.1 (MTN-2026-0004-NET).
