@@ -401,6 +401,26 @@ La red doméstica utiliza una arquitectura de **segmentación por VLANs** con un
 - **Switch management:** Acceso desde VLAN 99 previsto; consolidar y bloquear desde otras VLANs.
 - **Firewall:** Revisar y limitar a VLAN 99/LAN según plan de hardening.
 
+---
+
+## Aliases OPNsense (inventario)
+
+| Alias | Tipo | Valor / Contenido |
+|---|---|---|
+| ADMIN_PC | Host(s) | 10.0.1.10, 10.0.1.11, 10.0.1.20 |
+| DNS_SERVERS | Host(s) | 10.0.30.10, 10.0.30.11 |
+| DUCKDNS | Host(s) | api.duckdns.org |
+| GMAIL_SMTP | Host(s) | smtp.gmail.com |
+| HOMEASSISTANT | Host(s) | 10.0.30.14 |
+| NAS | Host(s) | 10.0.1.173 |
+| NPM_DMZ | Host(s) | 10.0.20.10 |
+| PROXMOX_NODES | Host(s) | 10.0.99.100, 10.0.99.101, 10.0.99.110, 10.0.99.102 |
+| PXE_SERVER | Host(s) | 10.0.30.20 |
+| SWITCH | Host(s) | 10.0.99.200 |
+| UPTAME_KUMA | Host(s) | 10.0.99.20, 10.0.99.15 |
+| Z2MQTT | Host(s) | 10.0.30.12 |
+| ZBCOORD | Host(s) | 10.0.40.10 |
+
 
 ---
 
@@ -557,6 +577,7 @@ Consulta `mtn/completadas/` para lista completa y detalles.
 ## Cambios Planificados / Pendientes
 
 - **(Prioridad media)** RFC-2025-0020-APP (Propuesta, 2025-11-16): Instalación de servidor CUPS en VLAN de servidores y migración de impresora Epson M100 Ecotank.
+- **(Prioridad media)** RFC-2026-0016-SEC (Propuesta, 2026-02-17): Segmentación de red IoT (VLAN 40) con reglas restrictivas en OPNsense.
 - **(Prioridad media)** RFC-2026-0007-NET (Propuesta, 2026-02-11): Migrar gestión de APs UniFi U7 Lite a VLAN 99. Gestión actual en VLAN 1 (10.0.1.250 / 10.0.1.252); pendiente reservar IPs en 10.0.99.x y ejecutar plan.
 - **(Prioridad alta)** RFC-2026-0008-SEC (Propuesta, 2026-02-11): Endurecimiento de accesos admin (SSH clave + 2FA) y limitar gestión a VLAN 99; incluye ajustes de firewall y switches.
 - **(Prioridad media)** RFC-2026-0009-SEC (Propuesta, 2026-02-11): Caddy en CT por nodo Proxmox para front TLS de servicios internos en VLAN 99 (Zeus y Hermes), con CA interna/DNS-01 y sync opcional.
