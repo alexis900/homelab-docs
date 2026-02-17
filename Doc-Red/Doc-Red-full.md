@@ -579,6 +579,7 @@ Consulta `mtn/completadas/` para lista completa y detalles.
 - **(Prioridad media)** RFC-2025-0020-APP (Propuesta, 2025-11-16): Instalación de servidor CUPS en VLAN de servidores y migración de impresora Epson M100 Ecotank.
 - **(Prioridad media)** RFC-2026-0016-SEC (Propuesta, 2026-02-17): Segmentación de red IoT (VLAN 40) con reglas restrictivas en OPNsense.
 - **(Prioridad media)** RFC-2026-0017-NET (Propuesta, 2026-02-17): Creación de SSID IoT HOME_IoT en VLAN 40 (WPA2, aislamiento cliente‑cliente).
+- **(Prioridad media)** RFC-2026-0018-SEC (Propuesta, 2026-02-17): NTP interno unificado y bloqueo de NTP externo.
 - **(Prioridad media)** RFC-2026-0007-NET (Propuesta, 2026-02-11): Migrar gestión de APs UniFi U7 Lite a VLAN 99. Gestión actual en VLAN 1 (10.0.1.250 / 10.0.1.252); pendiente reservar IPs en 10.0.99.x y ejecutar plan.
 - **(Prioridad alta)** RFC-2026-0008-SEC (Propuesta, 2026-02-11): Endurecimiento de accesos admin (SSH clave + 2FA) y limitar gestión a VLAN 99; incluye ajustes de firewall y switches.
 - **(Prioridad media)** RFC-2026-0009-SEC (Propuesta, 2026-02-11): Caddy en CT por nodo Proxmox para front TLS de servicios internos en VLAN 99 (Zeus y Hermes), con CA interna/DNS-01 y sync opcional.
