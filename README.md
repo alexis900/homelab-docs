@@ -12,7 +12,7 @@ homelab-docs/
 ├── scripts/               # Utilidades locales (ej. build-doc-red.sh)
 ├── templates/             # Plantillas RFC, MTN, INC
 ├── rfc/                   # Requests for Change (propuestas/completadas)
-├── mtn/                   # Mantenimientos (planificados/completados)
+├── mtn/                   # Mantenimientos (propuestas/en-progreso/completadas)
 └── inc/                   # Incidentes
 ```
 
@@ -28,6 +28,7 @@ homelab-docs/
 ### SOPs rápidos
 
 - [SOP-CT-Proxmox](SOPs/SOP-CT-Proxmox.md) — despliegue/actualización de contenedores en Hermes.
+- [SOP-Proxmox-New-Node](SOPs/SOP-Proxmox-New-Node.md) — instalación de un nuevo nodo Proxmox.
 - [SOP-VLAN](SOPs/SOP-VLAN.md) — alta/cambio de VLAN en OPNsense + switches.
 - [SOP-TLS-Certs](SOPs/SOP-TLS-Certs.md) — gestión de certificados TLS en NPM y servicios internos.
 - [SOP-Incident-Red](SOPs/SOP-Incident-Red.md) — respuesta rápida a incidentes de red.
