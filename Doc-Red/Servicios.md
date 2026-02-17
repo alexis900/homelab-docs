@@ -147,4 +147,4 @@
 | comedor_termohigro | 0xa4c13859a3e356ab | LYWSD03MMC-z | Xiaomi | Comedor |
 | dormitorio_termohigro | 0xa4c138ae9a024402 | LYWSD03MMC-z | Xiaomi | Dormitorio |
 | oficina_alejandro_termohigro | 0xa4c138e913e72473 | LYWSD03MMC-z | Xiaomi | Oficina Alejandro |
-| zigbee_router_1 | 0xb43522fffe1e5c62 | Router | N/A | N/A |
+| zigbee_router_1 | 0xb43522fffe1e5c62 | DONGLE-E_R | SONOFF (Sonoff Zigbee 3.0 USB Dongle Plus (EFR32MG21) with router firmware) | Nodo Hermes |
