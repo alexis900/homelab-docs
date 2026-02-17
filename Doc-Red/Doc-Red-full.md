@@ -329,7 +329,7 @@ La red doméstica utiliza una arquitectura de **segmentación por VLANs** con un
 
 | Nombre propuesto | IEEE | Modelo | Marca | Ubicación |
 |---|---|---|---|---|
-| termohigro_desconocido_1 | 0xa4c1382757848383 | LYWSD03MMC-z | Xiaomi | Pendiente |
+| bano_termohigro | 0xa4c1382757848383 | LYWSD03MMC-z | Xiaomi | Baño |
 | techo_1a_planta_led1 | 0x44e2f8fffe36d25d | LED2104R3 | IKEA | 1a planta |
 | techo_2a_planta_led1 | 0x44e2f8fffe3a2a96 | LED2104R3 | IKEA | 2a planta |
 | techo_comedor_led1 | 0x90ab96fffe9b9862 | LED2005R5/LED2106R3 | IKEA | Comedor |
