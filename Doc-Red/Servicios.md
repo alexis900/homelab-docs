@@ -39,8 +39,8 @@
 | radarr.home.arpa | CNAME docker-srv2 | 1 | Alias Radarr en docker-srv2 | Activo |
 | jelly.home.arpa | CNAME docker-srv2 | 1 | Alias Jellyfin en docker-srv2 | Activo |
 | photos.home.arpa | CNAME docker-srv2 | 1 | Alias fotos en docker-srv2 | Activo |
-| u7-salon.home.arpa | 10.0.1.250 | 1 | AP UniFi U7 Lite salón | Activo |
-| u7-ruter.home.arpa | 10.0.1.252 | 1 | AP UniFi U7 Lite router | Activo |
+| u7-salon.home.arpa | 10.0.99.200 | 99 | AP UniFi U7 Lite salón | Activo |
+| u7-ruter.home.arpa | 10.0.99.202 | 99 | AP UniFi U7 Lite router | Activo |
 | npm.home.arpa | 10.0.20.10 | 20 | Nginx Proxy Manager (DMZ) | Activo |
 | ns1.home.arpa (NS1) | 10.0.30.10 | 30 | Servidor DNS primario | Activo |
 | ns2.home.arpa (NS2) | 10.0.30.11 | 30 | Servidor DNS secundario | Activo |
@@ -90,16 +90,15 @@
 - **Acceso:** Web UI, SSH y API
 - **Integración:** Control de SSIDs, banda ancha, roaming y políticas de WiFi
 - **APs desplegados (U7 Lite, 31/01/2026):**
-  - AP-1 — VLAN 1 (LAN), IP 10.0.1.250
-  - AP-2 — VLAN 1 (LAN), IP 10.0.1.252
-  - **Pendiente:** Migrar gestión de APs a VLAN 99 (RFC-2026-0007-NET)
+  - AP-1 — VLAN 99 (Gestión), IP 10.0.99.200
+  - AP-2 — VLAN 99 (Gestión), IP 10.0.99.202
 
 ### SSIDs
 
 | SSID | VLAN / Tag | Bandas | Seguridad | Aislamiento | Propósito | APs |
 |------|------------|--------|-----------|------------|-----------|-----|
-| LAN | 1 (untagged) | 2.4 GHz, 5 GHz | WPA2/WPA3 Personal (mixto) | Desactivado | Acceso general de usuarios | AP-1, AP-2 |
-| IoT | 40 (tagged) | 2.4 GHz | WPA2 Personal | Activado (cliente-cliente bloqueado) | Dispositivos IoT aislados | AP-1, AP-2 |
+| LAN | 1 (untagged) | 2.4 GHz, 5 GHz | WPA3 Personal | Desactivado | Acceso general de usuarios | AP-1, AP-2 |
+| HOME_IoT | 40 (tagged) | 2.4 GHz | WPA2 Personal | Desactivado | Dispositivos IoT | AP-1, AP-2 |
 
 ## Monitorización: Uptime Kuma
 

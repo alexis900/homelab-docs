@@ -38,6 +38,21 @@
 - Configurar `vmbr0` para la VLAN de gestión.
 - Crear bridges adicionales según diseño (LAN, IoT, DMZ, etc.).
 - Verificar MTU, VLAN tagging y trunking con el switch.
+- Si se usa bridge VLAN-aware, definir explícitamente VLANs permitidas con `bridge-vids` (p. ej. `bridge-vids 1 99`) para evitar pérdida de conectividad al iniciar CT/VM en VLANs no declaradas.
+
+Ejemplo mínimo de `vmbr0` con VLAN-aware en `/etc/network/interfaces`:
+
+```conf
+auto vmbr0
+iface vmbr0 inet static
+    address 10.0.99.100/24
+    gateway 10.0.99.1
+    bridge-ports eno1
+    bridge-stp off
+    bridge-fd 0
+    bridge-vlan-aware yes
+    bridge-vids 1 99
+```
 
 ## 6) Almacenamiento
 

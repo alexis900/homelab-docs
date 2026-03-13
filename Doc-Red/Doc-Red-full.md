@@ -239,8 +239,8 @@ La red doméstica utiliza una arquitectura de **segmentación por VLANs** con un
 | radarr.home.arpa | CNAME docker-srv2 | 1 | Alias Radarr en docker-srv2 | Activo |
 | jelly.home.arpa | CNAME docker-srv2 | 1 | Alias Jellyfin en docker-srv2 | Activo |
 | photos.home.arpa | CNAME docker-srv2 | 1 | Alias fotos en docker-srv2 | Activo |
-| u7-salon.home.arpa | 10.0.1.250 | 1 | AP UniFi U7 Lite salón | Activo |
-| u7-ruter.home.arpa | 10.0.1.252 | 1 | AP UniFi U7 Lite router | Activo |
+| u7-salon.home.arpa | 10.0.99.200 | 99 | AP UniFi U7 Lite salón | Activo |
+| u7-ruter.home.arpa | 10.0.99.202 | 99 | AP UniFi U7 Lite router | Activo |
 | npm.home.arpa | 10.0.20.10 | 20 | Nginx Proxy Manager (DMZ) | Activo |
 | ns1.home.arpa (NS1) | 10.0.30.10 | 30 | Servidor DNS primario | Activo |
 | ns2.home.arpa (NS2) | 10.0.30.11 | 30 | Servidor DNS secundario | Activo |
@@ -290,16 +290,15 @@ La red doméstica utiliza una arquitectura de **segmentación por VLANs** con un
 - **Acceso:** Web UI, SSH y API
 - **Integración:** Control de SSIDs, banda ancha, roaming y políticas de WiFi
 - **APs desplegados (U7 Lite, 31/01/2026):**
-  - AP-1 — VLAN 1 (LAN), IP 10.0.1.250
-  - AP-2 — VLAN 1 (LAN), IP 10.0.1.252
-  - **Pendiente:** Migrar gestión de APs a VLAN 99 (RFC-2026-0007-NET)
+  - AP-1 — VLAN 99 (Gestión), IP 10.0.99.200
+  - AP-2 — VLAN 99 (Gestión), IP 10.0.99.202
 
 ### SSIDs
 
 | SSID | VLAN / Tag | Bandas | Seguridad | Aislamiento | Propósito | APs |
 |------|------------|--------|-----------|------------|-----------|-----|
-| LAN | 1 (untagged) | 2.4 GHz, 5 GHz | WPA2/WPA3 Personal (mixto) | Desactivado | Acceso general de usuarios | AP-1, AP-2 |
-| IoT | 40 (tagged) | 2.4 GHz | WPA2 Personal | Activado (cliente-cliente bloqueado) | Dispositivos IoT aislados | AP-1, AP-2 |
+| LAN | 1 (untagged) | 2.4 GHz, 5 GHz | WPA3 Personal | Desactivado | Acceso general de usuarios | AP-1, AP-2 |
+| HOME_IoT | 40 (tagged) | 2.4 GHz | WPA2 Personal | Desactivado | Dispositivos IoT | AP-1, AP-2 |
 
 ## Monitorización: Uptime Kuma
 
@@ -524,6 +523,8 @@ Registrar en [INC](../inc/) usando [template](../templates/INC.md):
 
 | RFC | Título | Fecha | Criticidad | Estado |
 |-----|--------|-------|-----------|--------|
+| RFC-2026-0017-NET | Creacion de SSID IoT HOME_IoT en VLAN 40 | 2026-03-13 | Media | ✓ |
+| RFC-2026-0007-NET | Migración de gestión de APs UniFi U7 Lite a VLAN 99 | 2026-03-13 | Media | ✓ |
 | RFC-2026-0013-APP | Migración de UniFi Network Server a UniFi OS Server | 2026-02-17 | Media | ✓ |
 | RFC-2026-0015-IOT | Instalacion de rele Sonoff ZBMINIR2 con neutro para bombilla exterior | 2026-02-16 | Media | ✓ |
 | RFC-2026-0014-IOT | Instalacion de lampara IKEA NYMÅNE + 3 bombillas Zigbee en Oficina Alejandro | 2026-02-15 | Baja | ✓ |
@@ -532,9 +533,6 @@ Registrar en [INC](../inc/) usando [template](../templates/INC.md):
 | RFC-2026-0010-HW | Instalación física final de APs UniFi U7 Lite | 2026-02-11 | Media | ✓ |
 | RFC-2026-0005-HW | Despliegue y adopción de dos switches Omada SG205GP en VLAN de gestión | 2026-02-11 | Media | ✓ |
 | RFC-2026-0004-APP | Migración de Uptime Kuma a contenedor Docker | 2026-02-11 | Media | ✓ |
-| RFC-2026-0003-NET | Migración de DHCP normal a Kea en OPNsense 25.7.11_9 | 2026-02-06 | Media | ✓ |
-| RFC-2026-0006-NET | Instalación y adopción de puntos de acceso UniFi U7 Lite | 2026-01-31 | Media | ✓ |
-| RFC-2026-0002-NET | Instalación de CT UniFi Network Server | 2026-01-28 | Media | ✓ |
 
 Consulta el histórico completo en `rfc/completadas/` para el resto de RFCs.
 
@@ -554,6 +552,9 @@ Consulta `mtn/completadas/` para lista completa y detalles.
 
 ## Cambios Recientes (Últimos 30 días)
 
+- **2026-03-13:** Incidencia en nodo Hermes al iniciar CT en VLAN 99; pérdida de red y `/etc/pve` en read-only, resuelta (INC-2026-0001-SYS).
+- **2026-03-13:** SSID HOME_IoT en VLAN 40 creado y validado (RFC-2026-0017-NET); aislamiento cliente‑cliente desactivado.
+- **2026-03-13:** Migración de gestión de APs UniFi U7 Lite a VLAN 99 completada (RFC-2026-0007-NET).
 - **2026-02-17:** Migración UniFi Network Server → UniFi OS Server completada (RFC-2026-0013-APP).
 - **2026-02-16:** Finalizada instalación relé Sonoff ZBMINIR2 para luz exterior (RFC-2026-0015-IOT).
 - **2026-02-15:** Actualización firmware relé Zigbee `luz_exterior_rele` (MTN-2026-0007-HW).
@@ -568,19 +569,12 @@ Consulta `mtn/completadas/` para lista completa y detalles.
 - **2026-02-11:** Migración de Uptime Kuma a contenedor Docker (RFC-2026-0004-APP)
 - **2026-02-11:** Despliegue de dos switches Omada SG205GP (RFC-2026-0005-HW)
 - **2026-02-11:** Instalación física final de APs UniFi U7 Lite (RFC-2026-0010-HW)
-- **2026-02-07:** Actualización de OPNsense a 26.1 (MTN-2026-0002-NET)
-- **2026-02-06:** Migración de DHCP a Kea en OPNsense (RFC-2026-0003-NET)
-- **2026-01-31:** Instalación y adopción de APs UniFi U7 Lite (RFC-2026-0006-NET)
-- **2026-01-29:** Actualización Omada Controller (MTN-2026-0001-NET)
-- **2026-01-28:** Instalación de UniFi Network Server (RFC-2026-0002-NET)
 
 ## Cambios Planificados / Pendientes
 
 - **(Prioridad media)** RFC-2025-0020-APP (Propuesta, 2025-11-16): Instalación de servidor CUPS en VLAN de servidores y migración de impresora Epson M100 Ecotank.
 - **(Prioridad media)** RFC-2026-0016-SEC (Propuesta, 2026-02-17): Segmentación de red IoT (VLAN 40) con reglas restrictivas en OPNsense.
-- **(Prioridad media)** RFC-2026-0017-NET (Propuesta, 2026-02-17): Creación de SSID IoT HOME_IoT en VLAN 40 (WPA2, aislamiento cliente‑cliente).
 - **(Prioridad media)** RFC-2026-0018-SEC (Propuesta, 2026-02-17): NTP interno unificado y bloqueo de NTP externo.
-- **(Prioridad media)** RFC-2026-0007-NET (Propuesta, 2026-02-11): Migrar gestión de APs UniFi U7 Lite a VLAN 99. Gestión actual en VLAN 1 (10.0.1.250 / 10.0.1.252); pendiente reservar IPs en 10.0.99.x y ejecutar plan.
 - **(Prioridad alta)** RFC-2026-0008-SEC (Propuesta, 2026-02-11): Endurecimiento de accesos admin (SSH clave + 2FA) y limitar gestión a VLAN 99; incluye ajustes de firewall y switches.
 - **(Prioridad media)** RFC-2026-0009-SEC (Propuesta, 2026-02-11): Caddy en CT por nodo Proxmox para front TLS de servicios internos en VLAN 99 (Zeus y Hermes), con CA interna/DNS-01 y sync opcional.
 - **(Prioridad baja)** RFC-2025-0015-HW (Propuesta, 2025-09-27): Instalación de dos enchufes Schuko y una toma RJ45 Cat6a en canaleta empotrada.
