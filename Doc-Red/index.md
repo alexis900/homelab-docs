@@ -1,4 +1,4 @@
-# Documentación de Infraestructura de Red
+ca# Documentación de Infraestructura de Red
 
 **Última actualización:** 11 de febrero de 2026  
 **Responsable:** Alejandro Martín Pérez
