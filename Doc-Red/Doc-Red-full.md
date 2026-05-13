@@ -468,11 +468,14 @@ Cuando algo se rompe:
 | MTN-2026-0009-NET | Actualización del firewall OPNsense de la versión 26.1 a 26.1.8 | 2026-05-14 | Baja |
 | MTN-2026-0005-SYS | Actualización del nodo Zeus de la versión 9.1.4 a 9.1.5 | 2026-02-14 | Baja |
 | MTN-2026-0006-SYS | Actualización del nodo Hermes de la versión 9.1.4 a 9.1.5 | 2026-02-14 | Baja |
+| MTN-2026-0010-SYS | Actualización del nodo Hermes a la versión 9.1.11 | 2026-05-14 | Media |
+| MTN-2026-0011-SYS | Actualización del nodo Zeus a la versión 9.1.11 | 2026-05-14 | Media |
 | MTN-2026-0003-NET | Actualización UniFi Network Application 10.0.162 → 10.1.85 | 2026-02-14 | Media |
 
 ## Cambios Recientes
 
 - 2026-05-14: Actualización de OPNsense a 26.1.8.
+- 2026-05-14: Actualización del nodo Hermes y Zeus a 9.1.11.
 - 2026-03-13: SSID HOME_IoT en VLAN 40 creado y validado.
 - 2026-03-13: Migración de gestión de APs UniFi U7 Lite a VLAN 99 completada.
 - 2026-03-13: Incidencia en nodo Hermes al iniciar CT en VLAN 99 resuelta.

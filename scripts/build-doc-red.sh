@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
-# Concatenate Doc-Red legacy files into a single Markdown file.
+# Concatenate Doc-Red files into a single Markdown file.
 # Usage: scripts/build-doc-red.sh [output-file]
 
 set -euo pipefail
 
-out_file="${1:-Doc-Red/legacy/Doc-Red-full.md}"
+out_file="${1:-Doc-Red/Doc-Red-full.md}"
 
 parts=(
-  "Doc-Red/legacy/00_INDICE.md"
-  "Doc-Red/legacy/Arquitectura.md"
-  "Doc-Red/legacy/VLANs.md"
-  "Doc-Red/legacy/Servicios.md"
-  "Doc-Red/legacy/Seguridad.md"
-  "Doc-Red/legacy/Procedimientos.md"
-  "Doc-Red/legacy/Backup.md"
-  "Doc-Red/legacy/Monitorizacion.md"
-  "Doc-Red/legacy/Contacto.md"
-  "Doc-Red/legacy/Cambios.md"
-  "Doc-Red/legacy/Dispositivos.md"
+  "Doc-Red/00_INDICE.md"
+  "Doc-Red/Arquitectura.md"
+  "Doc-Red/VLANs.md"
+  "Doc-Red/Servicios.md"
+  "Doc-Red/Seguridad.md"
+  "Doc-Red/Procedimientos.md"
+  "Doc-Red/Backup.md"
+  "Doc-Red/Monitorizacion.md"
+  "Doc-Red/Contacto.md"
+  "Doc-Red/Cambios.md"
+  "Doc-Red/Dispositivos.md"
 )
 
 out_dir="$(dirname "$out_file")"
