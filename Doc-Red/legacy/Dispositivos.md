@@ -25,7 +25,7 @@
 | Estado | Activo |
 
 **Nota de ubicación:** la VM de OPNsense está alojada en el nodo Proxmox **Zeus**.  
-**Nota reciente (2026-02-14):** tras la actualización a OPNsense 26.1 (MTN-2026-0002-NET), el DHCP normal corre sobre **Kea DHCP**. El incidente de PXE provocado al desactivar ISC DHCP quedo corregido y documentado en `rfc/completadas/RFC-2026-0012-NET.md`.
+**Nota reciente (2026-05-14):** tras la actualización a OPNsense 26.1.8 (MTN-2026-0009-NET), el DHCP normal sigue corriendo sobre **Kea DHCP**. El incidente de PXE provocado al desactivar ISC DHCP quedó corregido y documentado en `rfc/completadas/RFC-2026-0012-NET.md`.
 
 ## Virtualización: Proxmox
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Regenera Doc-Red/Doc-Red-full.md si se modifica alguna sección de Doc-Red
+# Regenera Doc-Red/legacy/Doc-Red-full.md si se modifica la documentación legacy
 # Úsalo como hook: ln -s ../../scripts/hooks/pre-commit-doc-red.sh .git/hooks/pre-commit
 
 set -euo pipefail
@@ -9,7 +9,7 @@ changed=$(git diff --cached --name-only)
 needs_build=false
 while IFS= read -r path; do
 case "$path" in
-    Doc-Red/index.md|Doc-Red/*)
+    Doc-Red/legacy/*)
       needs_build=true
       break
       ;;
@@ -17,7 +17,7 @@ case "$path" in
 done <<< "$changed"
 
 if [[ "$needs_build" == "true" ]]; then
-  echo "[hook] Regenerando Doc-Red/Doc-Red-full.md..."
+  echo "[hook] Regenerando Doc-Red/legacy/Doc-Red-full.md..."
   ./scripts/build-doc-red.sh
-  git add Doc-Red/Doc-Red-full.md
+  git add Doc-Red/legacy/Doc-Red-full.md
 fi
