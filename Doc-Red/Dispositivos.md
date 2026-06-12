@@ -29,6 +29,8 @@
 
 ## Virtualización: Proxmox
 
+**Nota:** las IPs de gestión permanecen en VLAN 99; las IPs de VLAN 1 se documentan como secundarias o de contingencia.
+
 | Atributo | Valor |
 |----------|-------|
 | Nodo | Zeus |
@@ -36,6 +38,8 @@
 | Sistema | Debian |
 | VLAN Gestión | VLAN 99 |
 | IP Gestión | 10.0.99.100/24 |
+| VLAN Secundaria | VLAN 1 |
+| IP Secundaria | 10.0.1.125/24 |
 | Capacidad | CPU, RAM, almacenamiento (ver planificación) |
 | Estado | Activo |
 
@@ -46,5 +50,7 @@
 | Sistema | Debian |
 | VLAN Gestión | VLAN 99 |
 | IP Gestión | 10.0.99.102/24 |
+| VLAN Secundaria | VLAN 1 |
+| IP Secundaria | 10.0.1.230/24 |
 | Capacidad | CPU, RAM, almacenamiento (ver planificación) |
 | Estado | Activo |

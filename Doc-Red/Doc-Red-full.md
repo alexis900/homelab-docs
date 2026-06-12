@@ -446,6 +446,7 @@ Cuando algo se rompe:
 
 | RFC | Título | Fecha | Criticidad |
 |---|---|---:|---|
+| RFC-2026-0022-DOC | Documentación de IPs secundarias de Proxmox en VLAN 1 | 2026-06-12 | Baja |
 | RFC-2026-0017-NET | Creacion de SSID IoT HOME_IoT en VLAN 40 | 2026-03-13 | Media |
 | RFC-2026-0007-NET | Migración de gestión de APs UniFi U7 Lite a VLAN 99 | 2026-03-13 | Media |
 | RFC-2026-0013-APP | Migración de UniFi Network Server a UniFi OS Server | 2026-02-17 | Media |
@@ -468,14 +469,19 @@ Cuando algo se rompe:
 | MTN-2026-0009-NET | Actualización del firewall OPNsense de la versión 26.1 a 26.1.8 | 2026-05-14 | Baja |
 | MTN-2026-0005-SYS | Actualización del nodo Zeus de la versión 9.1.4 a 9.1.5 | 2026-02-14 | Baja |
 | MTN-2026-0006-SYS | Actualización del nodo Hermes de la versión 9.1.4 a 9.1.5 | 2026-02-14 | Baja |
+| MTN-2026-0012-SYS | Actualización de contenedores Docker del host docker-srv2 a la última versión | 2026-06-11 | Media |
+| MTN-2026-0013-SYS | Actualización de los CTs alojados en Hermes a la última versión | 2026-06-11 | Media |
 | MTN-2026-0010-SYS | Actualización del nodo Hermes a la versión 9.1.11 | 2026-05-14 | Media |
 | MTN-2026-0011-SYS | Actualización del nodo Zeus a la versión 9.1.11 | 2026-05-14 | Media |
 | MTN-2026-0003-NET | Actualización UniFi Network Application 10.0.162 → 10.1.85 | 2026-02-14 | Media |
 
 ## Cambios Recientes
 
+- 2026-06-12: Documentadas las IPs secundarias de Proxmox en VLAN 1.
 - 2026-05-14: Actualización de OPNsense a 26.1.8.
 - 2026-05-14: Actualización del nodo Hermes y Zeus a 9.1.11.
+- 2026-06-11: Actualización de los contenedores Docker del host docker-srv2 a la última versión disponible.
+- 2026-06-11: Actualización de los CTs alojados en Hermes a Debian 13.5.
 - 2026-03-13: SSID HOME_IoT en VLAN 40 creado y validado.
 - 2026-03-13: Migración de gestión de APs UniFi U7 Lite a VLAN 99 completada.
 - 2026-03-13: Incidencia en nodo Hermes al iniciar CT en VLAN 99 resuelta.
@@ -527,6 +533,8 @@ Cuando algo se rompe:
 
 ## Virtualización: Proxmox
 
+**Nota:** las IPs de gestión permanecen en VLAN 99; las IPs de VLAN 1 se documentan como secundarias o de contingencia.
+
 | Atributo | Valor |
 |----------|-------|
 | Nodo | Zeus |
@@ -534,6 +542,8 @@ Cuando algo se rompe:
 | Sistema | Debian |
 | VLAN Gestión | VLAN 99 |
 | IP Gestión | 10.0.99.100/24 |
+| VLAN Secundaria | VLAN 1 |
+| IP Secundaria | 10.0.1.125/24 |
 | Capacidad | CPU, RAM, almacenamiento (ver planificación) |
 | Estado | Activo |
 
@@ -544,5 +554,7 @@ Cuando algo se rompe:
 | Sistema | Debian |
 | VLAN Gestión | VLAN 99 |
 | IP Gestión | 10.0.99.102/24 |
+| VLAN Secundaria | VLAN 1 |
+| IP Secundaria | 10.0.1.230/24 |
 | Capacidad | CPU, RAM, almacenamiento (ver planificación) |
 | Estado | Activo |
